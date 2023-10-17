@@ -1,0 +1,19 @@
+# Ignore all files in these dirs:
+/backups/
+/cache/
+/lib/
+/local/
+lock
+/log/
+/mail/
+/opt/
+run
+/spool/
+/tmp/
+www/devdrew
+www/devbobby
+www/devluke
+www/devjacob
+*.json
+vendor
+*.lock
