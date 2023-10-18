@@ -1,8 +1,8 @@
 <!-- Begin PHP Functions -->
 <?php
 session_start();
-include("/var/plugins/config.php");
-/*if ($_SERVER["REQUEST_METHOD"] == "POST") {
+include("/var/plugins/database/database.php");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST["fname"]) && !empty($_POST["lname"]) && !empty($_POST["email"]) && !empty($_POST["pass"])) {
         $fname = $_POST["fname"];
         $lname = $_POST["lname"];
@@ -32,7 +32,7 @@ include("/var/plugins/config.php");
     } else {
         $error = "Oops. Please enter a value for all fields.";
     }
-}*/
+}
 ?>
 <!-- End PHP Functions -->
 <!DOCTYPE html>
@@ -47,7 +47,6 @@ include("/var/plugins/config.php");
 	<script src="js/jquery-3.7.1.min.js"></script>
         <script src="js/bootstrap-5.3.2.bundle.min.js"></script>
 	<script src="js/fontawesome-6.4.2.js"></script>
-    <script src="js/register.js"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" href="css/bootstrap-5.3.2.min.css">
@@ -88,7 +87,7 @@ include("/var/plugins/config.php");
                         <input name="pass" type="password" class="form-control"/>
                     </div>
                     <div class="form-control text-center">
-                        <button type="button" id="registerBtn" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </form>
             </div>

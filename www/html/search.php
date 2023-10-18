@@ -7,11 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $itemType = $_POST["itemType"];
     $store = $_POST["store"];
     $db = new DatabaseNew();
-    $db->query("SELECT item.name, price.price, store.name FROM item, price, store, item_type WHERE item.id = price.item_id AND price.store_id = store.id AND item.type_id = item_type.id AND item.name = :item AND item_type.name = :itemType AND store.name = :store");
+    $db->query("SELECT item.name, price.price, store.name AS store FROM item, price, store, item_type WHERE item.id = price.item_id AND price.store_id = store.id AND item.type_id = item_type.id AND item.name = :item AND item_type.name = :itemType AND store.name = :store");
     $db->bind(':item', $item);
     $db->bind(':itemType', $itemType);
     $db->bind(':store', $store);
-    $result = $db->single();
+    $result = $db->multiple();
 }
 ?>
 <!-- End PHP Functions -->
@@ -61,11 +61,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<h1>Results for ",$item , ", " , $itemType , ", " , $store,"</h1>";
             }
             if (!empty($result)){
-                foreach(new TableRows(new RecursiveArrayIterator($result)) as $k=>$v) {
-                    echo $v;
+                echo "<table>";
+                echo "<tr>";
+                echo "<th>Item</th>";
+                echo "<th>Price</th>";
+                echo "<th>Store</th>";
+                echo "</tr>";
+                foreach ($result as $row){
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["price"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["store"]) . "</td>";
+                    echo "</tr>";
                 }
+                echo "</table>";
             }
-            else{
+            else if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "<h1>0 results</h1>";
             }
         ?>
