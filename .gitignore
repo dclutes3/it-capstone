@@ -10,10 +10,7 @@ lock
 run
 /spool/
 /tmp/
-www/devdrew
-www/devbobby
-www/devluke
-www/devjacob
 *.json
 vendor
 *.lock
+node_modules

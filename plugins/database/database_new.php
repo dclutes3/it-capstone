@@ -23,16 +23,17 @@ class DatabaseNew {
         $this->stmt->bindParam($bindString,$bindValue);
     }
 
+      //this function executes a query. this should be used directly only when the query does not expect a result (like a deletion)
+    public function execute(){
+        $this->stmt->execute();
+    }
+
     //this function returns the number of rows of the most recently executed query
     public function rowCount(){
         return $this->stmt->getRowCount();
     }
 
-    //this function executes a query. this should be used directly only when the query does not expect a result (like a deletion)
-    public function execute(){
-        $this->stmt->execute();
-    }
-
+  
     //this function executes a query and returns only one row, so if you expect one value or want the first row only of a query
     public function single(){
         $this->execute();

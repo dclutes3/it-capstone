@@ -1,3 +1,4 @@
 <?php
-include_once("database/database.php");
-include_once("log/log.php");
+include("database/database.php");
+include("database/database_new.php");
+include("log/log.php");
