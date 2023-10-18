@@ -1,80 +1,64 @@
-<?php 
+<?php
 class Database {
-	private $dbHost = "capstone.c8pz0fqew1c3.us-east-2.rds.amazonaws.com";
-	private $dbUser = "admin";
-	private $port = 3306;
-	private $dbPassword = "70NzYUJehuQ4MjMpZCsg";
-	private $dbName = "capstone";
-	private $conn;
-	private $query;
-        private $stmt;
+    private $host = "capstone.c8pz0fqew1c3.us-east-2.rds.amazonaws.com";
+    private $user = "admin";
+    private $password = "70NzYUJehuQ4MjMpZCsg";
+    private $dbname = "capstone";
 
-	public function __construct(){
-		$this->conn =  new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName, $this->port);
-	}	
-	
-	public function tester(){
-		if($this->conn->connect_error){
-			die("Connection failed: " . $this->conn->connect_error);
-		} else {
-			echo("Connection Success\n");
-		}
-	}
+    private $dbh;
+    private $stmt;
 
-	public function query($query){
-		$this->query = $query;
-	}
-        
-        public function stmtprepare($stmt){
-		$outstmt = $this->conn->prepare($stmt);
-		return $outstmt;
-	}
-        
-        public function stmt($stmt){
-		$this->stmt = $stmt;
-	}
+    public function __construct(){
+        $this->dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname,$this->user,$this->password);
 
-	public function single(){
-		$result =  $this->conn->query($this->query);
-		$this->query="";
-		return json_encode($result->fetch_all()[0],true);
-	}
+    }
+    
+    //this function prepares the SQL statement to be executed
+    public function query($query){
+        $this->stmt = $this->dbh->prepare($query);
+    }
 
-	public function multiple(){
-		$result =  $this->conn->query($this->query);
-		$this->query="";
-		return json_encode($result->fetch_all(),true);
-	}
+    //this function binds the params by calling bind(":string",$value)
+    public function bind($bindString,$bindValue){
+        $this->stmt->bindParam($bindString,$bindValue);
+    }
 
-	public function execute(){
-		$this->conn->query($this->query);
-		$this->query="";
-		return "EXECUTED\n";
-	}
-        
-        public function singleprepared(){
-		$this->stmt->execute();
-		$result = $this->stmt->get_result();
-		$this->stmt="";
-		return json_encode($result->fetch_all()[0],true);
-	}
+      //this function executes a query. this should be used directly only when the query does not expect a result (like a deletion)
+    public function execute(){
+        $this->stmt->execute();
+    }
 
-	public function multipleprepared(){
-		$this->stmt->execute();
-		$result = $this->stmt->get_result();
-		$this->stmt="";
-		return json_encode($result->fetch_all(),true);
-	}
+    //this function returns the number of rows of the most recently executed query
+    public function rowCount(){
+        return $this->stmt->getRowCount();
+    }
 
-	public function executeprepared(){
-		$this->stmt->execute();
-		$this->stmt="";
-		return "EXECUTED\n";
-	}
+  
+    //this function executes a query and returns only one row, so if you expect one value or want the first row only of a query
+    public function single(){
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-	public function close(){
-		$this->conn->close();
-		return "DISCONNECTED\n";
-	}
+    //this function executes a query and returns all of the rows
+    public function multiple(){
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //start a database transaction
+    public function startTransaction(){
+        $this->dbh->beginTransaction();
+    }
+
+    //complete a database transaction
+    public function commitTransaction(){
+        $this->dbh->commit();
+    }
+
+    //stop a database transaction (if there is an exception for example)
+    public function stopTransaction(){
+        $this->dbh->rollBack();
+    }
 }
 ?>

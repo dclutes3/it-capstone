@@ -1,3 +1,5 @@
+<script src="js/navbarStatus.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">Grocery Price Comparer</a>
@@ -27,10 +29,7 @@
                                 <i class="fas fa-user fa-lg"></i>
                             </button>
                             <br />
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="usermenu">
-                                <a href="login.php" class="dropdown-item" type="button">Login<a>
-                                <a href="register.php" class="dropdown-item" type="button">Register</a>
-                            </div>
+                            <div id="dropdown-options" class="dropdown-menu dropdown-menu-end" aria-labelledby="usermenu"></div>
                         </div>
                     </li>
                 </ul>

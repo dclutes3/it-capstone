@@ -1,7 +1,38 @@
-var script = document.createElement('script');
-script.src = 'https://code.jquery.com/jquery-3.7.1.min.js'; // Check https://jquery.com/ for the current version
-document.getElementsByTagName('head')[0].appendChild(script);
-
-$("#register").on('click',function(){
-    console.log("TEST");
+$(document).on('click',"#registerBtn",function(){
+    var fname = $("input[name=fname]").val();
+    var lname = $("input[name=lname]").val();
+    var email = $("input[name=email]").val();
+    var password = $("input[name=pass]").val();
+    if(!fname || !lname || !email || !password){
+        $("#registerError").html("Oops. Please enter a value for all fields.");
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: 'ajax/registerUser.php',
+            data: {
+                fname: fname,
+                lname: lname,
+                email: email,
+                password: password
+            },
+            success: function(data){
+                var data = $.parseJSON(data);
+                if(data.code == 1){ //on success
+                    $("input[name=fname]").val("");
+                    $("input[name=lname]").val("");
+                    $("input[name=email]").val("");
+                    $("input[name=pass]").val("");
+                    window.location="http://3.14.168.225/index.php"
+                } else if (data.code == -1){ //existing email
+                    $("#registerError").html("This email already exists.");
+                } else { //other error
+                    $("#registerError").html("An unknown error occurred.");
+                }
+            },
+            error: function(xhr, status, error){
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> /ajax/registerUser.php';
+                alert(errorMessage);
+            }
+        })
+    }
 });

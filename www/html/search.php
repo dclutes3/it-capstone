@@ -1,12 +1,12 @@
 <!-- Begin PHP Functions -->
 <?php
 session_start();
-include("/var/plugins/database/database_new.php");
+include("../../plugins/config.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $item = $_POST["item"];
     $itemType = $_POST["itemType"];
     $store = $_POST["store"];
-    $db = new DatabaseNew();
+    $db = new Database();
     $db->query("SELECT item.name, price.price, store.name AS store FROM item, price, store, item_type WHERE item.id = price.item_id AND price.store_id = store.id AND item.type_id = item_type.id AND item.name = :item AND item_type.name = :itemType AND store.name = :store");
     $db->bind(':item', $item);
     $db->bind(':itemType', $itemType);
