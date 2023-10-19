@@ -30,7 +30,7 @@ class Database {
 
     //this function returns the number of rows of the most recently executed query
     public function rowCount(){
-        return $this->stmt->getRowCount();
+        return $this->stmt->rowCount();
     }
 
   

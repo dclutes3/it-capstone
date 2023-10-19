@@ -1,8 +1,9 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 try {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
     if (!empty($_SESSION["user"])) {
         echo json_encode(array("code" => 1, "data" => "User is logged in."));
     } else {

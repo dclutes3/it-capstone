@@ -18,6 +18,7 @@ $(document).on('click',"#registerBtn",function(){
             success: function(data){
                 var data = $.parseJSON(data);
                 if(data.code == 1){ //on success
+                    $("#registerError").html("");
                     $("input[name=fname]").val("");
                     $("input[name=lname]").val("");
                     $("input[name=email]").val("");

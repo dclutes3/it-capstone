@@ -1,9 +1,21 @@
 <!-- Begin PHP Functions -->
 <?php
-if(session_status() == PHP_SESSION_NONE){
-    session_start();
+session_start();
+include("../../plugins/config.php");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $item = $_POST["item"];
+    $itemType = $_POST["itemType"];
+    $store = $_POST["store"];
+    $db = new Database();
+    $db->query("SELECT item.name, price.price, store.name AS store FROM item, price, store, item_type WHERE item.id = price.item_id AND price.store_id = store.id AND item.type_id = item_type.id AND item.name = :item AND item_type.name = :itemType AND store.name = :store");
+    $db->bind(':item', $item);
+    $db->bind(':itemType', $itemType);
+    $db->bind(':store', $store);
+    $result = $db->multiple();
 }
 ?>
+<!-- End PHP Functions -->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,9 +25,9 @@ if(session_status() == PHP_SESSION_NONE){
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- JS -->
-        <script src="js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
-        <script src="js/plugins/jquery-3.7.1.min.js"></script>
-	    <script src="js/plugins/fontawesome-6.4.2.js"></script>
+        <script src="js/bootstrap-5.3.2.bundle.min.js"></script>
+        <script src="js/jquery-3.7.1.min.js"></script>
+	    <script src="js/fontawesome-6.4.2.js"></script>
         <script src="js/search.js"></script>
 
         <!-- CSS -->
@@ -43,12 +55,36 @@ if(session_status() == PHP_SESSION_NONE){
                 <option value="Hy-Vee">Hy-Vee</option>
                 <option value="Walmart">Walmart</option>
                 <option value="Aldi">Aldi</option>
-            <input id="globalSearchBtn" type="button" value="Search">
+            <input id="globalSearchBtn" type="submit" value="Search">
         </form>
         <p id="searchError"></p>
         <div id="searchBody">
             <?php //AJAX BODY WILL BE POPULATED HERE ?>
         </div>
+        <?php
+            if (!empty($_POST["item"])) {
+                echo "<h1>Results for ",$item , ", " , $itemType , ", " , $store,"</h1>";
+            }
+            if (!empty($result)){
+                echo "<table>";
+                echo "<tr>";
+                echo "<th>Item</th>";
+                echo "<th>Price</th>";
+                echo "<th>Store</th>";
+                echo "</tr>";
+                foreach ($result as $row){
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["price"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["store"]) . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                echo "<h1>0 results</h1>";
+            }
+        ?>
         <!-- End Content Area -->
     </body>
 </html>

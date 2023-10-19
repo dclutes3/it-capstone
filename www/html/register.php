@@ -12,9 +12,9 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- JS -->
-        <script src="js/jquery-3.7.1.min.js"></script>
-        <script src="js/bootstrap-5.3.2.bundle.min.js"></script>
-        <script src="js/fontawesome-6.4.2.js"></script>
+        <script src="js/plugins/jquery-3.7.1.min.js"></script>
+        <script src="js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
+        <script src="js/plugins/fontawesome-6.4.2.js"></script>
         <script src="js/register.js"></script>
 
         <!-- CSS -->
