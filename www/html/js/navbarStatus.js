@@ -1,6 +1,6 @@
 $.ajax({
     type: 'POST',
-    url: 'app/ajax/checkStatus.php',
+    url: '../../ajax/checkStatus.php',
     success: function (data) {
         var data = $.parseJSON(data);
         if (data.code == 1) { //logged in
@@ -10,7 +10,7 @@ $.ajax({
             `);
             if(window.location.href.includes("register.php") || window.location.href.includes("login.php"))
             {
-                window.location="http://3.14.168.225/index.php";
+                window.location="http://3.14.168.225/app/pages/index.php";
             }
         } else if (data.code == -1) { //not logged in
             $("#dropdown-options").html(`

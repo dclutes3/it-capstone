@@ -10,7 +10,7 @@ $(function(){
         } else {
             $.ajax({
                 type: 'POST',
-                url: 'app/ajax/globalSearch.php',
+                url: '../ajax/globalSearch.php',
                 data: {
                     item: itemName,
                     type: itemType,

@@ -8,7 +8,7 @@ $(document).on('click',"#registerBtn",function(){
     } else {
         $.ajax({
             type: 'POST',
-            url: 'app/ajax/registerUser.php',
+            url: '../ajax/registerUser.php',
             data: {
                 fname: fname,
                 lname: lname,
@@ -23,7 +23,7 @@ $(document).on('click',"#registerBtn",function(){
                     $("input[name=lname]").val("");
                     $("input[name=email]").val("");
                     $("input[name=pass]").val("");
-                    window.location="http://3.14.168.225/index.php"
+                    window.location="http://3.14.168.225/app/pages/index.php"
                 } else if (data.code == -1){ //existing email
                     $("#registerError").html("This email already exists.");
                 } else { //other error
