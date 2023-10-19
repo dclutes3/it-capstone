@@ -6,7 +6,7 @@ $(document).on('click',"#loginBtn",function(){
     } else {
         $.ajax({
             type: 'POST',
-            url: 'ajax/loginUser.php',
+            url: 'app/ajax/loginUser.php',
             data: {
                 email: email,
                 password: password

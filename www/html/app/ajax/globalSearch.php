@@ -2,7 +2,7 @@
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
-include_once("../../../plugins/config.php");
+include_once("../../../../plugins/config.php");
 //assume these are not null, given javascript logic
 $item = $_REQUEST["item"];
 $itemType = $_REQUEST["type"];

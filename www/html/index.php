@@ -18,7 +18,7 @@
     </head>
     <body>
         <!-- Begin Navbar Include -->
-        <?php include 'navbar.php' ?>
+        <?php include 'app/pages/navbar.php' ?>
         <!-- End Navbar Include -->
         <!-- Begin Banner Area -->
         <div id="banner" class="d-flex mb-4">

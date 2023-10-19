@@ -8,7 +8,7 @@ $(document).on('click',"#registerBtn",function(){
     } else {
         $.ajax({
             type: 'POST',
-            url: 'ajax/registerUser.php',
+            url: 'app/ajax/registerUser.php',
             data: {
                 fname: fname,
                 lname: lname,
@@ -31,7 +31,7 @@ $(document).on('click',"#registerBtn",function(){
                 }
             },
             error: function(xhr, status, error){
-                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> /ajax/registerUser.php';
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/registerUser.php';
                 alert(errorMessage);
             }
         })

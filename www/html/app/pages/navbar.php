@@ -1,4 +1,4 @@
-<script src="js/navbarStatus.js"></script>
+<script src="../../js/navbarStatus.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Home</a>
+                    <a class="nav-link" href="../../index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="stores.php">Stores</a>

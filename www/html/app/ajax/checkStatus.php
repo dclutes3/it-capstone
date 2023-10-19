@@ -2,6 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+include_once("../../../../plugins/config.php");
+$log = new Log("checkStatus");
 
 try {
     if (!empty($_SESSION["user"])) {

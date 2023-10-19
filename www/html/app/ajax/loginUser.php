@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-include_once("../../../plugins/config.php");
+include_once("../../../../plugins/config.php");
 
 $email = $_REQUEST["email"];
 $password = $_REQUEST["password"];
