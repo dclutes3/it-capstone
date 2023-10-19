@@ -2,6 +2,7 @@
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
+include_once("../../../plugins/config.php");
 //assume these are not null, given javascript logic
 $item = $_REQUEST["item"];
 $itemType = $_REQUEST["type"];
@@ -15,23 +16,25 @@ try{
     $db->bind(':itemType', $itemType);
     $db->bind(':store', $store);
     $result = $db->multiple();
+    $log->warning("RES: ",$result);
     if($db->rowCount()==0){
-        $html = "<h1>0 results</h1>";
+        $html = "<p class='h3'>0 results</p>";
     } else {
-        $html = "<h1>Results for ".$item. ", " . $itemType . ", " . $store . "</h1>";
+        $html = "<p class='h3'>Results for ".$item. ", " . $itemType . ", " . $store . "</p>";
         $html .= "<table>";
-        $html .= "<th>Item</th>";
-        $html .= "<th>Price</th>";
-        $html .= "<th>Store</th>";
+            $html .= "<th>Item</th>";
+            $html .= "<th>Price</th>";
+            $html .= "<th>Store</th>";
         foreach ($result as $row){
             $html .= "<tr>";
-            $html .= "<td>" . $row["name"] . "</td>";
-            $html .= "<td>" . $row["price"] . "</td>";
-            $html .= "<td>" . $row["store"] . "</td>";
+                $html .= "<td>" . $row["name"] . "</td>";
+                $html .= "<td>" . $row["price"] . "</td>";
+                $html .= "<td>" . $row["store"] . "</td>";
             $html .= "</tr>";
         }
         $html .= "</table>";
     }
+    $log->warning("html: ".$html);
     echo json_encode(array('code'=>1,'msg'=>$html));
 } catch (PDOException $e){
     $log->error("PDO EXCEPTION IN GLOBAL SEARCH");
