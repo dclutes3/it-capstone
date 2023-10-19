@@ -22,30 +22,34 @@ session_start();
 	    <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
         <link rel="stylesheet" href="../../css/grocery.css">
     </head>
-    <body>
+    <body class='bg-light'>
         <!-- Begin Navbar Include -->
         <?php include 'navbar.php' ?>
         <!-- End Navbar Include -->
         <!-- Begin Content Area -->
         <div class="d-flex align-items-center justify-content-center vh-100">
-            <div class="shadow py-5 bg-white rounded-2 mt-3">
-                <h5 id="loginError"></h5>
-                <form>
-                    <div class="mb-3 text-center">
-                        <h1>Login</h1>
+            <div class="container w-25 shadow py-5 bg-white rounded-2 mt-3">
+                <div class="row">
+                    <div class='col-12'>
+                        <h5 id="loginError"></h5>
+                        <form>
+                            <div class="mb-3 text-center">
+                                <h1>Login</h1>
+                            </div>
+                            <div class="mb-3">
+                                <p class="form-label">Email</p>
+                                <input type="email" class="form-control" name="email"/>
+                            </div>
+                            <div class="mb-3">
+                                <p class="form-label">Password</p>
+                                <input type="password" class="form-control" name="pass"/>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" id="loginBtn" class="btn btn-success">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <p class="form-label">Email</p>
-                        <input type="email" class="form-control" name="email"/>
-                    </div>
-                    <div class="mb-3">
-                        <p class="form-label">Password</p>
-                        <input type="password" class="form-control" name="pass"/>
-                    </div>
-                    <div class="text-center">
-                        <button type="button" id="loginBtn" class="btn btn-success">Submit</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
         <!-- End Content Area -->
