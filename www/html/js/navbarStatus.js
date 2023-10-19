@@ -1,6 +1,6 @@
 $.ajax({
     type: 'POST',
-    url: '../../ajax/checkStatus.php',
+    url: '../ajax/checkStatus.php',
     success: function (data) {
         var data = $.parseJSON(data);
         if (data.code == 1) { //logged in
@@ -29,3 +29,4 @@ $.ajax({
         alert(errorMessage);
     }
 });
+
