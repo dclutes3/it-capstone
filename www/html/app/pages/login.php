@@ -31,7 +31,7 @@ session_start();
             <div class="container w-25 shadow py-5 bg-white rounded-2 mt-3">
                 <div class="row">
                     <div class='col-12'>
-                        <h5 id="loginError"></h5>
+                        <p class="h5 text-danger text-center" id="loginError"></p>
                         <form>
                             <div class="mb-3 text-center">
                                 <h1>Login</h1>

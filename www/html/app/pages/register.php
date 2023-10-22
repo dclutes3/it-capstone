@@ -31,7 +31,7 @@ session_start();
             <div class="container w-25 shadow py-5 bg-white rounded-2 mt-3">
                 <div class="row">
                     <div class='col-12'>
-                        <h5 id="registerError"></h5>
+                        <p class="h5 text-danger text-center" id="registerError"></p>
                         <form id="register" action="register.php" method="post">
                             <div class="mb-3 text-center">
                                 <h1>Register</h1>

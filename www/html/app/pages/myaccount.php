@@ -9,11 +9,13 @@
         <!-- JS -->
         <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
         <script src="../../js/plugins/jquery-3.7.1.min.js"></script>
-	    <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
+        <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
+	<script src="../../js/myaccount.js"></script>
+
 
         <!-- CSS -->
         <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
-	    <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
+        <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
         <link rel="stylesheet" href="../../css/grocery.css">
     </head>
     <body>
@@ -22,7 +24,11 @@
         <!-- End Navbar Include -->
         <!-- Begin Content Area -->
         <div class="text-center pt-5">
-            <h1>My Account coming soon!</h1>
+            <h1>TESTING</h1>
+            <br />
+            <h3 id="name"></h3>
+            <br />
+            <h3 id="email"></h3>
         </div>
         <!-- End Content Area -->
     </body>
