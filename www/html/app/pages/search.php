@@ -16,12 +16,14 @@ if(session_status() == PHP_SESSION_NONE){
         <script src="../../js/plugins/jquery-3.7.1.min.js"></script>
         <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
 	    <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
-        <script src="../../js/search.js"></script>
+        <script src="../../js/search1.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
 
         <!-- CSS -->
         <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
 	    <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
         <link rel="stylesheet" href="../../css/grocery.css">
+        <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />-->
     </head>
     <body id="body" class="bg-light">
         <!-- Begin Navbar Include -->
@@ -41,23 +43,11 @@ if(session_status() == PHP_SESSION_NONE){
                 </div>
                 <div class="col-2">
                     <label for="itemType">Item type: </label>
-                    <select class="form-control form-control-sm" id="itemType" name="itemType">
-                        <option value="All">All</option>
-                        <option value="Cereals and bakery products">Cereals and bakery products</option>
-                        <option value="Meats, poultry, fish and eggs">Meats, poultry, fish and eggs</option>
-                        <option value="Dairy products">Dairy products</option>
-                        <option value="Fruits and vegetables">Fruits and vegetables</option>
-                        <option value="Other foods at home">Other foods at home</option>
-                    </select>
+                    <select class="form-control form-control-sm" id="itemType" name="itemType"></select>
                 </div>
                 <div class="col-2">
                     <label for="store">Store: </label>
-                    <select class="form-control form-control-sm" id="storeName" name="store">
-                        <option value="All">All</option>
-                        <option value="Hy-Vee">Hy-Vee</option>
-                        <option value="Walmart">Walmart</option>
-                        <option value="Aldi">Aldi</option>
-                    </select>
+                    <select class="form-control form-control-sm" id="storeName" name="store"></select>
                 </div>
                 <div class="col-1 d-flex flex-column">
                     <button id="globalSearchBtn" class="btn btn-success mt-auto mx-1" type="button">Search</button>

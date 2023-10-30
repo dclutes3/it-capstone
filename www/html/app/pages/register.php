@@ -32,7 +32,7 @@ session_start();
                 <div class="row">
                     <div class='col-12'>
                         <p class="h5 text-danger text-center" id="registerError"></p>
-                        <form id="register" action="register.php" method="post">
+                        <form>
                             <div class="mb-3 text-center">
                                 <h1>Register</h1>
                             </div>

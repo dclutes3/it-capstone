@@ -7,11 +7,10 @@ include_once("../../../../plugins/config.php");
 
 try {
 $usr = new user($_SESSION["user"]);
-$fname = $usr->getfName();
-$lname = $usr->getlName();
-$email = $usr->getEmail();
 
-echo json_encode(array('code' => 1, 'fname' => $fname, 'lname' => $lname, 'email' => $email));
+$usr->delete();
+
+echo json_encode(array("code" => 1, "data" => "Successful."));
 }
 catch (Exception $e) {
     $log->error("EXCEPTION");
