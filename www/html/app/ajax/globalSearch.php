@@ -11,8 +11,17 @@ $store = $_REQUEST["store"];
 $log = new Log("globalSearch");
 try{
     $db = new Database();
-    $db->query("SELECT item.name, price.price, store.name AS store FROM item, price, store, item_type WHERE item.id = price.item_id AND price.store_id = store.id AND item.type_id = item_type.id AND item.name = :item AND item_type.name = :itemType AND store.name = :store");
-    $db->bind(':item', $item);
+    $db->query(
+        "SELECT item.name, price.price, store.name AS store
+        FROM item, price, store, item_type
+        WHERE item.id = price.item_id
+            AND price.store_id = store.id
+            AND item.type_id = item_type.id
+            AND item.name LIKE :item
+            AND item_type.name = :itemType
+            AND store.name = :store"
+    );
+    $db->bind(':item', '%'.$item.'%');
     $db->bind(':itemType', $itemType);
     $db->bind(':store', $store);
     $result = $db->multiple();
