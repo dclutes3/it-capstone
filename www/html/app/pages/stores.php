@@ -24,11 +24,13 @@
         <?php include 'navbar.php' ?>
         <!-- End Navbar Include -->
         <!-- Begin Content Area -->
-        <div class="text-center pt-5 mb-5">
+        <div id="storesContainer" class="container shadow py-5 bg-white rounded-2 mt-3">
+        <div class="text-center mb-5">
             <h1>All Stores</h1>
         </div>
         <p class="h5 text-danger text-center mb-5" id="storesError"></p>
-        <table id="stores"></div>
+        <table id="stores" />
+        </div>
         <!-- End Content Area -->
     </body>
 </html>
