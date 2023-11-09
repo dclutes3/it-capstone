@@ -29,7 +29,7 @@ try{
     if($db->rowCount()==0){
         $html = "<p class='h3'>0 Results</p>";
     } else {
-        $html = "<p class='h3'>Results for ".$item. ", " . $itemType . ", " . $store . "</p>";
+        $html = "<p class='h3'>Results for: '".$item. "', " . $itemType . ", " . $store . "</p>";
         $html .= "<table>";
             $html .= "<th>Item</th>";
             $html .= "<th>Price</th>";

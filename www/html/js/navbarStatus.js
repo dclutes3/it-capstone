@@ -8,7 +8,7 @@ $.ajax({
             <a href="myaccount.php" class="dropdown-item" type="button">My Account<a>
             <a href="../scripts/logoutUser.php" class="dropdown-item" type="button">Logout</a>
             `);
-            if(window.location.href.includes("register.php") || window.location.href.includes("login.php"))
+            if(window.location.href.includes("register.php") || window.location.href.includes("login.php") || window.location.href.includes("forgotpw.php") || window.location.href.includes("secquestion.php") || window.location.href.includes("resetpw.php"))
             {
                 window.location="http://3.14.168.225/app/pages/index.php";
             }

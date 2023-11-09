@@ -18,6 +18,10 @@ try {
     } else {
         if (password_verify($password, $res["password"])) {
             $_SESSION["user"] = $res["id"];
+	    $_SESSION['resetid'] = null;
+            $_SESSION['question'] = null;
+            $_SESSION['answer'] = null;
+	    $_SESSION['userToReset'] = null;
             echo json_encode(array("code" => 1, "data" => "Logged in."));
         } else {
             echo json_encode(array("code" => -1, "data" => "invalid login"));

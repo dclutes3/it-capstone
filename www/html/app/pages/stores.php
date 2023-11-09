@@ -29,7 +29,7 @@
             <h1>All Stores</h1>
         </div>
         <p class="h5 text-danger text-center mb-5" id="storesError"></p>
-        <table id="stores" />
+        <table id="stores">
         </div>
         <!-- End Content Area -->
     </body>

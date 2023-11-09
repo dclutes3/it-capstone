@@ -79,6 +79,18 @@ class user {
             $log->error("PDO EXCEPTION");
         }
     }
+    
+    public function resetPass($pass) {
+        $log = new Log("updateuser");
+        try {
+            $this->db->query("UPDATE capstone.user SET password = :pass WHERE ID = :id");
+            $this->db->bind(":pass", password_hash($pass, PASSWORD_ARGON2ID));
+            $this->db->bind(":id", $this->id);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            $log->error("PDO EXCEPTION");
+        }
+    }
 
 }
 ?>

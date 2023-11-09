@@ -27,36 +27,49 @@ session_start();
         <?php include 'navbar.php' ?>
         <!-- End Navbar Include -->
         <!-- Begin Content Area -->
-        <div class="d-flex align-items-center justify-content-center vh-100">
-            <div class="container w-25 shadow py-5 bg-white rounded-2 mt-3">
-                <div class="row">
-                    <div class='col-12'>
-                        <p class="h5 text-danger text-center" id="registerError"></p>
-                        <form>
-                            <div class="mb-3 text-center">
-                                <h1>Register</h1>
-                            </div>
-                            <div class="mb-3">
-                                <p class="form-label">First Name</p>
-                                <input name="fname" type="text" class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <p class="form-label">Last Name</p>
-                                <input name="lname" type="text" class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <p class="form-label">Email</p>
-                                <input name="email" type="email" class="form-control"/>
-                            </div>
-                            <div class="mb-3">
-                                <p class="form-label">Password</p>
-                                <input name="pass" type="password" class="form-control"/>
-                            </div>
-                            <div class="text-center">
-                                <button type="button" id="registerBtn" class="btn btn-success">Submit</button>
-                            </div>
-                        </form>
-                    </div>  
+        <div class="d-flex align-items-center vh-100">
+            <div class="container mt-3">
+                <div class="row justify-content-center">
+                    <div class='col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4'>
+                        <div class="shadow p-3 mb-5 bg-white rounded-2">
+                            <p class="h5 text-danger text-center" id="registerError"></p>
+                            <form>
+                                <div class="mb-3 text-center">
+                                    <h1>Register</h1>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="form-label">First Name</p>
+                                    <input name="fname" type="text" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="form-label">Last Name</p>
+                                    <input name="lname" type="text" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="form-label">Email</p>
+                                    <input name="email" type="email" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="form-label">Password</p>
+                                    <input name="pass" type="password" class="form-control"/>
+                                </div>
+                                <div class="mb-3 text-center">
+                                    <p>Enter a Security Question and Answer that will allow you to recover your account - <strong>This cannot be changed</strong></p>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="form-label">Security Question</p>
+                                    <input name="squestion" type="text" class="form-control"/>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="form-label">Security Answer</p>
+                                    <input name="sanswer" type="text" class="form-control"/>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" id="registerBtn" class="btn btn-success">Submit</button>
+                                </div>
+                            </form>
+                        </div>  
+                    </div>
                 </div>
             </div>
         </div>

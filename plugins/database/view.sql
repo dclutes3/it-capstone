@@ -1,17 +1,24 @@
 CREATE OR REPLACE VIEW view_item AS
 SELECT
     a.id,
-    a.name as name,
-    b.name as type_name,
-    c.price as price
+    a.name as item,
+    b.name as type,
+    c.price as price,
+    d.name as store,
+    c.modified_date as date,
+    (SELECT SUM(e.type) from vote e WHERE e.price_id = c.id LIMIT 1) as vote
 FROM
-    item a,
-    item_type b,
-    price c
+    item a
+LEFT JOIN
+    item_type b ON a.type_id = b.id
+LEFT JOIN
+    price c ON a.id = c.item_id
+LEFT JOIN
+    store d on c.store_id = d.id
+LEFT JOIN
+    vote e on c.id = e.price_id
 WHERE
-    a.type_id = b.id
-AND
-    a.id = c.item_id;
+    a.name IS NOT NULL;
 
 CREATE OR REPLACE VIEW view_price_voting AS
 SELECT
