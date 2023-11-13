@@ -18,6 +18,7 @@ try {
     } else {
         if (password_verify($password, $res["password"])) {
             $_SESSION["user"] = $res["id"];
+	    $_SESSION["name"] = $res["fname"] . " " . $res["lname"];
 	    $_SESSION['resetid'] = null;
             $_SESSION['question'] = null;
             $_SESSION['answer'] = null;

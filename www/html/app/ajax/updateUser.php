@@ -22,6 +22,7 @@ else
 }
 
 echo json_encode(array("code" => 1, "data" => "Successfully updated your account."));
+$_SESSION["name"] = $fname . " " . $lname;
 }
 catch (Exception $e) {
     $log->error("EXCEPTION");

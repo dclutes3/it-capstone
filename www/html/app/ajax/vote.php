@@ -26,9 +26,8 @@ try{
     } else {
         $sql2 = "UPDATE vote SET type = :type WHERE id=:vote";
     }
-     
+
     $db->query($sql2);
-    $log->warning($sql2);
     $db->bind(":type",$type);
     if($vote_id != null) {
         $db->bind(":vote",$vote_id);
@@ -39,7 +38,8 @@ try{
     }
         
     $db->execute();
-
+    $log->warning("user $user has updated vote_id:$vote_id for price:$price with vote:$type"); 
+    
     echo json_encode(array("code"=>1,"msg"=>"vote successful"));
 } catch (PDOException $e){
     $log->error("PDO EXCEPTION IN VOTE AJAX".$e->getMessage());

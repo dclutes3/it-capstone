@@ -12,4 +12,8 @@ $db->query("INSERT INTO item (name, type_id) VALUES (:name, :type_id)");
 $db->bind(':name', $name);
 $db->bind(':type_id', $type_id);
 $db->execute();
+$db->query("SELECT id FROM item WHERE name = :name");
+$db->bind(':name', $name);
+$result = $db->single();
+echo json_encode($result);
 ?>

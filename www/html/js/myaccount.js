@@ -34,6 +34,7 @@ $(document).on('click', "#updateBtn", function () {
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
                     $("#updateError").html("Account successfully updated.");
+		    $("#name").html("Welcome, " + fname + " " + lname + "&nbsp;");
                 } else { //error
                     $("#updateError").html("An unknown error occurred.");
                 }

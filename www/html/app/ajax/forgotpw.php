@@ -18,7 +18,7 @@ try{
         $_SESSION['resetid']=$res['id'];
         $_SESSION['question']=$res['squestion'];
         $_SESSION['answer']=$res['sanswer'];
-        echo json_encode(array("code"=>1,"data"=>"Email exists."));
+        echo json_encode(array("code"=>1,"data"=>"User set."));
     }
 } catch (PDOException $e){
     $log->error("PDO EXCEPTION");

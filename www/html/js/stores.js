@@ -31,5 +31,5 @@ $.ajax({
 })
 
 function storeItems(Id) {
-    window.location.href = 'storeItems.php?Id=' + Id;
+    window.location.href = 'items.php?Id=' + Id;
 }

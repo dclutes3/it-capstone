@@ -6,14 +6,18 @@ if (session_status() == PHP_SESSION_NONE) {
 include_once("../../../../plugins/config.php");
 
 try {
-    $usr = new user($_SESSION["userToReset"]);
-    $password = $_REQUEST["pass"];
+    if (empty($_SESSION["userToReset"])) {
+        echo json_encode(array("code" => -1, "data" => "No user authorized/selected."));
+    } else {
+        $usr = new user($_SESSION["userToReset"]);
+        $password = $_REQUEST["pass"];
 
-    $usr->resetPass($password);
-    
-    $_SESSION["user"] = $_SESSION["userToReset"];
+        $usr->resetPass($password);
 
-    echo json_encode(array("code" => 1, "data" => "Successfully reset password."));
+        $_SESSION["user"] = $_SESSION["userToReset"];
+
+        echo json_encode(array("code" => 1, "data" => "Successfully reset password."));
+    }
 } catch (Exception $e) {
     $log->error("EXCEPTION");
     echo json_encode(array("code" => -2, "data" => "An unknown error occurred."));

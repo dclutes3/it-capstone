@@ -30,7 +30,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- End Navbar Include -->
         <!-- Begin Content Area -->
         <div class="container shadow py-3 bg-white rounded-2 mt-3">
-            <input type="text" id="userId" value="<?php echo $_SESSION['user'] ?>">
+            <input type="hidden" id="userId" value="<?php echo $_SESSION['user'] ?>">
             <div class="text-center py-2">
                 <h1 class="mb-2" id="title"></h1>
                 <h5 class="mb-2" id="address"></h5>

@@ -29,9 +29,10 @@ try{
 	$db->bind(":sanswer",$sanswer);
         $db->execute();
 
-        $db->query("SELECT id FROM user WHERE email=:email");
+        $db->query("SELECT * FROM user WHERE email=:email");
         $db->bind(":email",$email);
         $_SESSION['user']=$db->single()['id'];
+	$_SESSION["name"] = $db->single()["fname"] . " " . $db->single()["lname"];
 	$_SESSION['resetid'] = null;
         $_SESSION['question'] = null;
         $_SESSION['answer'] = null;

@@ -1,3 +1,9 @@
+<!-- Begin PHP Functions -->
+<?php
+session_start();
+?>
+<!-- End PHP Functions -->
+
 <script src="../../js/navbarStatus.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,15 +23,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="items.php">Items</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="search.php">Search</a>
-                </li>
+                <?php /* <li class="nav-item">
+                  <a class="nav-link" href="search.php">Search</a>
+                  </li> */ ?>
             </ul>
             <div class="d-flex">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="usermenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white" aria-hidden="true">
+                                <a id="name">
+                                    <?php
+                                    if (!empty($_SESSION["name"])) {
+                                        echo("Welcome, " . $_SESSION["name"] . "&nbsp;");
+                                    }
+                                    ?>
+                                </a>
                                 <i class="fas fa-user fa-lg"></i>
                             </button>
                             <br />

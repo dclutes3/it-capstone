@@ -19,6 +19,8 @@ LEFT JOIN
     vote e on c.id = e.price_id
 WHERE
     a.name IS NOT NULL;
+AND 
+    c.price is not null;
 
 CREATE OR REPLACE VIEW view_price_voting AS
 SELECT
