@@ -4,6 +4,7 @@ SELECT
     a.name as item,
     b.name as type,
     c.price as price,
+    c.id as price_id,
     d.name as store,
     c.modified_date as date,
     (SELECT SUM(e.type) from vote e WHERE e.price_id = c.id LIMIT 1) as vote
@@ -19,8 +20,8 @@ LEFT JOIN
     vote e on c.id = e.price_id
 WHERE
     a.name IS NOT NULL;
-AND 
-    c.price is not null;
+#AND 
+#    c.price is not null;
 
 CREATE OR REPLACE VIEW view_price_voting AS
 SELECT

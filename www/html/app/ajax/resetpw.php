@@ -15,6 +15,11 @@ try {
         $usr->resetPass($password);
 
         $_SESSION["user"] = $_SESSION["userToReset"];
+	$_SESSION["name"] = $usr->getfName() . " " . $usr->getlName();
+	$_SESSION['resetid'] = null;
+        $_SESSION['question'] = null;
+        $_SESSION['answer'] = null;
+	$_SESSION['userToReset'] = null;
 
         echo json_encode(array("code" => 1, "data" => "Successfully reset password."));
     }

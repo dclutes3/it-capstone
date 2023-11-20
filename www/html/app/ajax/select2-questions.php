@@ -5,11 +5,11 @@
     $log = new Log("GET ITEMS AJAX");
     
     try{
-        $sql = "SELECT id, name as text FROM item";
+        $sql = "SELECT id, question as text FROM secquestion";
         $db->query($sql);
         $results = $db->multiple();
     } catch(PDOException $e){
-        $log->error("PDO EXCEPTION in /app/ajax/select2-items.php");
+        $log->error("PDO EXCEPTION in /app/ajax/select2-questions.php");
         echo json_encode(array());
     }
     

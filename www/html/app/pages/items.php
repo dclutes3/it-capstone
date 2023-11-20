@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>Grocery Price Comparer</title>
+        <title>PricePal</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -42,11 +42,13 @@ if (session_status() == PHP_SESSION_NONE) {
                 <?php include_once 'filter.php' ?>
             </div>
             <div class='py-2'>
-            <button id="addItem" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal1">Add Item</button>            
+                <button id="addItem" type="button" class="btn btn-success">Add Item</button>
+                <button id="addToCart" type="button" class="btn btn-warning" disabled>Add to Cart</button>
             </div>
             <table id="tableItems" class="display w-100">
                 <thead>
                     <tr>
+                        <th style="max-width:25px;"></th>
                         <th>Item</th>
                         <th>Price</th>
                         <th>Type</th>
@@ -79,6 +81,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <p id="addItemModal1Error"></p>
                             <button type="button" class="btn btn-success" id="addItemButton1">Add Item</button>
                         </div>
                     </div>
@@ -100,13 +103,14 @@ if (session_status() == PHP_SESSION_NONE) {
                         <div class="modal-body">
                             <p>Enter the price and store name for the item</p>
                             <label for="priceTextBox">Price:</label>
-                            <input class="form-control form-control-sm" id="priceTextBox" type="text" placeholder="Enter price">
+                            <input class="form-control form-control-sm" id="priceTextBox" type="number" min="0" max="100" placeholder="Enter price">
                             
                             <label class="form-label" for="storeName">Store:</label>
                             <select class="add-store-select2 form-control" id="storeName"></select>
                         </div>
 
                         <div class="modal-footer">
+                            <p id="addItemModal2Error"></p>
                             <button type="button" class="btn btn-danger" id="addItemBackButton">Back</button>
                             <button type="button" class="btn btn-success" id="addItemButton2">Add Item</button>
                         </div>
@@ -127,7 +131,31 @@ if (session_status() == PHP_SESSION_NONE) {
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <p>Price added successfully</p>
+                            <p id="addItemModal3Text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+            <div class="modal" id="errorModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Item</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <p>You must be logged in to add items.</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <a href="login.php" class="btn btn-success">Log In</a>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>Grocery Price Comparer</title>
+        <title>PricePal</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

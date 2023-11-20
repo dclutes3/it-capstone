@@ -10,15 +10,11 @@ $type = ($_REQUEST['type']=='upvote') ? 1 : -1;
 $store = $_REQUEST['store'];
 
 try{
-    $db->query("SELECT id FROM store WHERE name=:store");
-    $db->bind(":store",$store);
-    $store_id = $db->single()['id'];
-
     $sql = "SELECT id FROM vote WHERE price_id=:price AND user_id=:user AND store_id=:store_id";
     $db->query($sql);
     $db->bind(":price",$price);
     $db->bind(":user",$user);
-    $db->bind(":store_id",$store_id);
+    $db->bind(":store_id",$store);
     $vote_id = $db->single()['id'];
 
     if($vote_id==null){
@@ -34,7 +30,7 @@ try{
     } else {
         $db->bind(":id",$user);
         $db->bind(":price",$price);
-        $db->bind(":store_id",$store_id);
+        $db->bind(":store_id",$store);
     }
         
     $db->execute();

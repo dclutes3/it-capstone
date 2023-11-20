@@ -7,7 +7,7 @@ session_start();
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>Grocery Price Comparer</title>
+        <title>PricePal</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -16,8 +16,10 @@ session_start();
         <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
         <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
         <script src="../../js/register.js"></script>
+        <script src="../../js/plugins/select2-4.1.0-rc.0.min.js"></script>
 
         <!-- CSS -->
+        <link href="../../css/select2-4.1.0-rc.0.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
         <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
         <link rel="stylesheet" href="../../css/grocery.css">
@@ -54,11 +56,11 @@ session_start();
                                     <input name="pass" type="password" class="form-control"/>
                                 </div>
                                 <div class="mb-3 text-center">
-                                    <p>Enter a Security Question and Answer that will allow you to recover your account - <strong>This cannot be changed</strong></p>
+                                    <p>Choose a Security Question and Answer that will allow you to recover your account - <strong>This cannot be changed</strong></p>
                                 </div>
                                 <div class="mb-3">
                                     <p class="form-label">Security Question</p>
-                                    <input name="squestion" type="text" class="form-control"/>
+                                    <select class='question-select2 form-control' type="text"></select>
                                 </div>
                                 <div class="mb-3">
                                     <p class="form-label">Security Answer</p>

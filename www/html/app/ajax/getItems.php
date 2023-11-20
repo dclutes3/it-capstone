@@ -10,10 +10,10 @@
     $high = ($_REQUEST['priceHigh'] !== "") ? intval($_REQUEST['priceHigh']) : null;
     $log->warning("store: $store, item: $item, low: $low, high: $high");
     try{
-        $sql = "SELECT item, price, type, store, date, vote, id FROM view_item WHERE 1";
+        $sql = "SELECT item, price, price_id, type, store, date, store_id, store_address, vote, id FROM view_item WHERE 1";
         $conditions = array();
         if ($store !== null) {
-            $conditions[] = "store = :store";
+            $conditions[] = "store_id = :store_id";
         }
         if ($item !== null) {
             $conditions[] = "item = :item";
@@ -30,9 +30,9 @@
         }
     
         $db->query($sql);
-        $log->warning($sql);
+        //$log->warning($sql);
         
-        if($store !== null) $db->bind(":store",$store);
+        if($store !== null) $db->bind(":store_id",$store);
         if($item !== null) $db->bind(":item",$item);
         if($low !== null) $db->bind(":low",$low);
         if($high !== null) $db->bind(":high",$high);
@@ -41,13 +41,16 @@
         $result_array = array();
         foreach ($results as $result){
             $row = array();
+            $row['price_id'] = $result['price_id'];
+	    $row['store_id'] = $result['store_id'];
             $row['item']    = $result['item'];
             $row['price']   = $result['price'];
             $row['type']    = $result['type'];
-            $row['store']   = $result['store'];
+            $row['store']   = $result['store'] . " - " . $result['store_address'];
             $row['date']    = $result['date'];
             $row['vote']    = array();
-            $row['vote']['id'] = $result['id'];
+            $row['vote']['id'] = $result['price_id'];
+	    $row['vote']['store_id'] = $result['store_id'];
             $row['vote']['sum'] = $result['vote'];
             $row['vote']['store'] = $result['store'];
             $result_array[] = $row;

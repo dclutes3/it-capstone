@@ -33,8 +33,7 @@ $(document).on('click', "#submitBtn", function () {
                 }
                 if (data.code == -1) { //on success
                     $("#forgotError").html("Incorrect answer.");
-                }
-                else { //error
+                } else { //error
                     $("#updateError").html("An unknown error occurred.");
                 }
             },

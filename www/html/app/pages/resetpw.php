@@ -1,13 +1,29 @@
 <!-- Begin PHP Functions -->
 <?php
-session_start();
+if(session_status()==PHP_SESSION_NONE){
+    session_start();
+}
+include_once("../../../../plugins/config.php");
+
+$check = $_SESSION['userToReset'];
+$check2 = $_SESSION['resetid'];
+
+if(empty($check))
+{
+    header("Location: http://3.14.168.225/app/pages/secquestion.php"); // not verified
+}
+else if(empty($check2))
+{
+    header("Location: http://3.14.168.225/app/pages/forgotpw.php"); // no user selected
+}
+
 ?>
 <!-- End PHP Functions -->
 <!DOCTYPE html>
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>Grocery Price Comparer</title>
+        <title>PricePal</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

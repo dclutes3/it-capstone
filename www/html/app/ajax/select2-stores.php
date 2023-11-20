@@ -5,7 +5,7 @@
     $log = new Log("GET ITEMS AJAX");
     
     try{
-        $sql = "SELECT id, name as text FROM store";
+        $sql = "SELECT id, CONCAT(name, ' - ', address) as text FROM store";
         $db->query($sql);
         $results = $db->multiple();
     } catch(PDOException $e){

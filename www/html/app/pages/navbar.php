@@ -1,6 +1,8 @@
 <!-- Begin PHP Functions -->
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!-- End PHP Functions -->
 
@@ -8,7 +10,7 @@ session_start();
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Grocery Price Comparer</a>
+        <a class="navbar-brand" href="index.php">PricePal</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,6 +31,11 @@ session_start();
             </ul>
             <div class="d-flex">
                 <ul class="navbar-nav">
+                    <li class='nav-item'>
+                        <?php if($_SESSION['user']) { ?>
+                        <a class="nav-link" href="cart.php"><i class="fas fa-cart-shopping fa-lg" style="color:white;"></i></a>
+                        <?php } ?>
+                    </li>
                     <li class="nav-item">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="usermenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white" aria-hidden="true">

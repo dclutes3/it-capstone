@@ -4,11 +4,11 @@
             <label for="filterItem" class="form-label">Item:</label>
             <select id="filterItem" class='item-select2 form-control' type="text"></select> 
         </div>
-        <div class='col-xl-2 col-lg-12'>
+        <div class='col-xl-4 col-lg-12'>
             <label for="filterStore" class="form-label">Store:</label>
             <select id="filterStore" class='store-select2 form-control' type="text"></select>
         </div>
-        <div class='col-xl-5 col-lg-12'>
+        <div class='col-xl-3 col-lg-12'>
             <label for="amount">Price range:</label>
             <input type="text" id="amount" readonly style="border:0; color:#000000; font-weight:bold;">
             <div id="filterPrice" class="mt-2"></div>

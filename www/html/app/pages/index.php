@@ -2,7 +2,7 @@
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>Grocery Price Comparer</title>
+        <title>PricePal</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -23,9 +23,9 @@
         <!-- Begin Banner Area -->
         <div id="banner" class="d-flex mb-4">
             <div class="my-auto">
-                <div class="text-center">
-                    <h1>Welcome!</h1>
-                    <h3>To get started, try one of the stores below, use the top navigation, or just search!</h3>
+                <div class="col-md-6">
+                    <h1>Looking to save money on groceries?</h1>
+                    <h3>PricePal lets you view the prices of groceries at stores around Columbia to help you find the best deals!</h3>
                     <a class="btn btn-success" href="items.php">Get Started</a>
                 </div>
             </div>
