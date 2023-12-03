@@ -1,3 +1,11 @@
+##########################
+#   drew clutes aack2f   #
+##########################
+
+
+####################################
+# ITEM VIEW FOR DATA REPESENTATION #
+####################################
 CREATE OR REPLACE VIEW view_item AS
 SELECT
     a.id,
@@ -23,6 +31,9 @@ WHERE
 #AND 
 #    c.price is not null;
 
+##########################
+# VIEW FOR VOTE PURPOSES #
+##########################
 CREATE OR REPLACE VIEW view_price_voting AS
 SELECT
     a.id as id,
@@ -48,6 +59,10 @@ AND b.user_id = e.id
 AND b.store_id = d.id
 AND c.type_id = f.id;
 
+
+################
+#   ARCHIVE    #
+################
 #CREATE OR REPLACE VIEW view_price_voting AS
 #SELECT 
 #    a.price_id as id,

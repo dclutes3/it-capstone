@@ -1,39 +1,39 @@
 $(function () {
-    if ($("#tableItems").length) {
+    if ($("#tableItems").length) {                                      //initialize the filter and table on page load
         initFilter();
         initTableItems();
     }
-    $("#tableItems").on("click", "#upvotePrice", function () {
+    $("#tableItems").on("click", "#upvotePrice", function () {          //call the vote function when upvote is clicked
         vote("upvote", $(this).data('id'), $(this).data('store_id'));
     })
-    $("#tableItems").on("click", "#downvotePrice", function () {
+    $("#tableItems").on("click", "#downvotePrice", function () {        //call the vote function when downvote is clicked
         vote("downvote", $(this).data('id'), $(this).data('store_id'));
     })
-    $("#applyFilter").on("click", function () {
+    $("#applyFilter").on("click", function () {                         //reinit tableItems when apply filter button is clicked
         initTableItems()
     })
-    $("#clearFilter").on("click", function () {
+    $("#clearFilter").on("click", function () {                         //clear the filter and reinit table items when clear filter button is clicked.
         clearFilter();
         initTableItems();
     })
 
     let arr;
-    $("#tableItems").on("change","#priceCheckbox", function(){
+    $("#tableItems").on("change","#priceCheckbox", function(){          //maintain an array of all checked checkboxes when one is changed
         arr=[]
         $("input[name='price-checkboxes']:checked").each(function(){
             arr.push($(this).data('price'));
         })
-        if(arr.length){
+        if(arr.length){                                                 //allow user to add selected items to cart, as long as something is selected. 
             $("#addToCart").prop('disabled',false);
         } else {
             $("#addToCart").prop('disabled',true);
         }
     })
 
-    $("#addToCart").on("click",function(){
-        var prices = JSON.stringify(arr);
+    $("#addToCart").on("click",function(){ 
+        var prices = JSON.stringify(arr);                               //convert the arr to JSON
         var count = arr.length;
-        if(confirm("Add ("+count+") Item(s) to cart?")){
+        if(confirm("Add ("+count+") Item(s) to cart?")){                //if confirmed, add the items to the cart based on updateCart.php script. 
             $.ajax({
                 type: 'POST',
                 url: '../app/ajax/updateCart.php',
@@ -44,7 +44,7 @@ $(function () {
                 success: function (data) {
                     console.log(data);
                     var data = $.parseJSON(data);
-                    if (data.code === 1) {
+                    if (data.code === 1) {                              //if there was an error, log error
                         console.log(data.msg);
                     } else {
                         console.log("ERROR");
@@ -58,7 +58,7 @@ $(function () {
         }
     })
 
-    $("#addItem").on("click", function () {
+    $("#addItem").on("click", function () {                             //if add item was clicked, clear the modal selections and bring up the add item modal
         if ($('#userId').val() != "") {
             $("#addItemModal1").modal("show");
             clearModalSelect2();
@@ -68,7 +68,7 @@ $(function () {
 
 
     })
-    $("#itemDropdown").on("change", function () {
+    $("#itemDropdown").on("change", function () {                       //when the item dropdown is changed, move to the next modal page as long as there is a selection. 
         $("#itemSelection").val($("#itemDropdown").val());
         if ($("#itemSelection").val() != "") {
             item_id = $("#itemSelection").val();
@@ -77,7 +77,8 @@ $(function () {
             $('#addItemModal2').modal('show');
         }
     });
-    $("#addItemBackButton").on("click", function () {
+
+    $("#addItemBackButton").on("click", function () {                   //when the back button is clicked, go back to the first page. 
         $('#addItemModal2').modal('hide');
         $('#addItemModal3').modal('hide');
         $('#addItemModal1').modal('show');
@@ -92,16 +93,16 @@ function initFilter() {
 
 var filter = ''
 
-function updateFilter() {
+function updateFilter() {                                               //update the filter based on the values of the filter inputs. 
     var store = ($('.store-select2 option:selected').length) ? $(".store-select2").select2('data')[0].id : "";
     var item = ($('.item-select2 option:selected').length) ? $(".item-select2").select2('data')[0].text : "";
     var priceLow = $("#filterPrice").slider("values", 0)
     var priceHigh = $("#filterPrice").slider("values", 1);
 
-    filter = '{"store":"' + store + '", "item":"' + item + '", "priceLow":' + priceLow + ', "priceHigh":' + priceHigh + '}';
-    console.log(filter);
+    filter = '{"store":"' + store + '", "item":"' + item + '", "priceLow":' + priceLow + ', "priceHigh":' + priceHigh + '}';  //convert to json object
+    //console.log(filter);
 }
-function clearFilter() {
+function clearFilter() { //reset the filter and update it to reflect that
     clearSelect2();
     $("#filterPrice").slider("values", [0, 100]);
     $("#amount").val("$" + $("#filterPrice").slider("values", 0) + " - $" + $("#filterPrice").slider("values", 1));
@@ -115,7 +116,7 @@ function clearSelect2() {
     clearModalSelect2();
 }
 
-function clearModalSelect2() {
+function clearModalSelect2() { //allow specific modal select2 boxes to be cleared
     $(".add-item-select2").val(null).trigger("change");
     $(".add-type-select2").val(null).trigger("change");
     $(".add-store-select2").val(null).trigger("change");
@@ -125,7 +126,7 @@ function clearModalSelect2() {
 
 var tableItems = ''
 
-var tableItemColumns = [
+var tableItemColumns = [ //define columns for the item datatable.
     {"data": "price_id","render": function (data, type, row){
         return (data != null) ? '<input type="checkbox" name="price-checkboxes" data-price=' + data + ' id="priceCheckbox"></input>' : "";
     }},
@@ -144,7 +145,7 @@ var tableItemColumns = [
     {"data": "date", "render": function (data, type, row) {
             return (data != null) ? data : "No Date Posted";
         }},
-    {"data": "vote", /*"orderable":false,*/"render": function (data, type, row) {
+    {"data": "vote", "orderable":false,"render": function (data, type, row) {
             var sum = (data.sum != null) ? data.sum : 0;
             if (sum > 0) {
                 color = "text-success";
@@ -161,9 +162,9 @@ var tableItemColumns = [
 ]
 
 function initTableItems() {
-    tableItems = $("#tableItems").DataTable();
+    tableItems = $("#tableItems").DataTable(); //initialise the table DOM to a datatable, so that it can be destroyed (for reinitialization purposes)
     tableItems.destroy();
-    updateFilter();
+    updateFilter();                             //update the filter to ensure the most recent data, and parse it for use in AJAX call
     filter = $.parseJSON(filter)
     tableItems = $('#tableItems').DataTable({
         "ajax": {
@@ -179,12 +180,11 @@ function initTableItems() {
     });
 }
 
-function vote(type, id, store) {
-    var user = $("#userId").val();
-    if (user == "") {
-        console.log("CANNOT VOTE WHEN NOT LOGGED IN");
-    } else if (id != null && (type == "upvote" || type == "downvote")) {
-        
+function vote(type, id, store) {                                        //takes vote type, id, and store for vote. 
+    var user = $("#userId").val();                                      //get the user id
+    if (user == "") {                                                   //if there isn't a user, you cannot vote. 
+        alert("Please Log In to Vote");
+    } else if (id != null && (type == "upvote" || type == "downvote")) { //otherwise if all params are correct, update the vote table with AJAX call. 
         $.ajax({
             type: 'POST',
             url: '../app/ajax/vote.php',
@@ -197,7 +197,7 @@ function vote(type, id, store) {
             success: function (data) {
                 console.log(data);
                 var data = $.parseJSON(data);
-                if (data.code === 1) {
+                if (data.code === 1) {                                  //reload the table if the vote is successful. 
                     $("#addToCart").prop("disabled",true);
                     tableItems.ajax.reload();
                 } else {
@@ -210,10 +210,10 @@ function vote(type, id, store) {
             }
         });
     } else {
-        console.log("ERROR");
+        console.log("An unknown error occurred");
     }
 }
-function initSelect2() {
+function initSelect2() {                                                //init all select2 boxes on the page, including the modal (that are hidden to start)
     if ($(".item-select2").length) {
         $.ajax({
             type: 'GET',
@@ -348,10 +348,8 @@ function initSlider() {
     }
 }
 
-
-//Add Item Code
-$(function () {
-    $('#addItemButton1').on('click', function(){
+$(function () {                                                         //code for add item modal functionality
+    $('#addItemButton1').on('click', function(){                        //store the data from modal 1 and move to the next modal on click
         name = $('#itemTextBox').val();
         type_id = $('#itemType').val();
         if (name == "" || type_id == null){
@@ -364,7 +362,7 @@ $(function () {
         }
     });
 
-    $('#addItemButton2').on('click', function () {
+    $('#addItemButton2').on('click', function () {                      //if all fields are filled correctly, push the data to the addItem AJAX script for insertions. 
         var price = $('#priceTextBox').val();
         var store_id = $('#storeName').val();
         if (price == "" || store_id == null){

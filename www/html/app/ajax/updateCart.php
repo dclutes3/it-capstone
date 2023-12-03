@@ -1,4 +1,8 @@
-<?php 
+<?php
+/********************* */
+/* Drew Clutes aack2f  */
+/********************* */
+ 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

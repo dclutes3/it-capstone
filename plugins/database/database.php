@@ -1,4 +1,8 @@
 <?php
+/********************* */
+/* Drew Clutes aack2f  */
+/********************* */
+
 class Database {
     private $host = "capstone.c8pz0fqew1c3.us-east-2.rds.amazonaws.com";
     private $user = "admin";

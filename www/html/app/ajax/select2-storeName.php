@@ -1,11 +1,15 @@
 <?php
+/********************* */
+/* Drew Clutes aack2f  */
+/********************* */
+
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 include_once("../../../../plugins/config.php");
 
 $db = new Database();
-$log = new Log("select2 store name");
+$log = new Log("select2-storeName AJAX");
 
 try{
     $db->query("SELECT id, name as text FROM store");

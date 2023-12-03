@@ -1,4 +1,9 @@
 <?php 
+/********************* */
+/* Drew Clutes aack2f  */
+/********************* */
+
+
 require 'vendor/autoload.php';
 
 use Monolog\Logger;
@@ -22,6 +27,7 @@ class Log{
         $this->log->error($statement);
     }
 
+    //for my sanity because i used this before and I keep doing it on accident
     public function debug($statement){
         $this->log->warning($statement);
     }
