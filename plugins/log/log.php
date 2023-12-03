@@ -21,4 +21,8 @@ class Log{
     public function error($statement){
         $this->log->error($statement);
     }
+
+    public function debug($statement){
+        $this->log->warning($statement);
+    }
 }

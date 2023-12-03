@@ -36,7 +36,7 @@ $(function () {
         if(confirm("Add ("+count+") Item(s) to cart?")){
             $.ajax({
                 type: 'POST',
-                url: '../ajax/updateCart.php',
+                url: '../app/ajax/updateCart.php',
                 data: {
                     prices: prices,
                     count: count,
@@ -187,7 +187,7 @@ function vote(type, id, store) {
         
         $.ajax({
             type: 'POST',
-            url: '../ajax/vote.php',
+            url: '../app/ajax/vote.php',
             data: {
                 type: type,
                 user: user,
@@ -378,7 +378,7 @@ $(function () {
                 if (addItem) {
                     $.ajax({
                         type: 'POST',
-                        url: '../ajax/addItem.php',
+                        url: '../app/ajax/addItem.php',
                         data: {
                             name: name,
                             type_id: type_id
@@ -389,7 +389,7 @@ $(function () {
                                 item_id = data.result.id;
                                 $.ajax({
                                     type: 'POST',
-                                    url: '../ajax/addPrice.php',
+                                    url: '../app/ajax/addPrice.php',
                                     data: {
                                         price: price,
                                         store_id: store_id,
@@ -409,7 +409,7 @@ $(function () {
                 } else {
                     $.ajax({
                         type: 'POST',
-                        url: '../ajax/addPrice.php',
+                        url: '../app/ajax/addPrice.php',
                         data: {
                             price: price,
                             store_id: store_id,

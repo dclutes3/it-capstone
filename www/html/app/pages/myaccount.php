@@ -2,21 +2,21 @@
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>PricePal</title>
+        <title>PricePal - My Account</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- JS -->
-        <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
-        <script src="../../js/plugins/jquery-3.7.1.min.js"></script>
-        <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
-        <script src="../../js/myaccount.js"></script>
+        <script src="../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
+        <script src="../js/plugins/jquery-3.7.1.min.js"></script>
+        <script src="../js/plugins/fontawesome-6.4.2.js"></script>
+        <script src="../js/myaccount.js"></script>
 
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
-        <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
-        <link rel="stylesheet" href="../../css/grocery.css">
+        <link rel="stylesheet" href="../css/bootstrap-5.3.2.min.css">
+        <link rel="stylesheet" href="../css/fontawesome-6.4.2.css">
+        <link rel="stylesheet" href="../css/grocery.scss">
     </head>
     <body>
         <!-- Begin Navbar Include -->
@@ -31,7 +31,7 @@
                             <p class="h5 text-danger text-center" id="updateError"></p>
                             <form>
                                 <div class="mb-3 text-center">
-                                    <h1>My Account</h1>
+                                    <h1 class="title-gray-bg">My Account</h1>
                                 </div>
                                 <div class="mb-3">
                                     <p class="form-label">First Name</p>

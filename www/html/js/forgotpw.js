@@ -5,7 +5,7 @@ $(document).on('click',"#forgotBtn",function(){
     } else {
         $.ajax({
             type: 'POST',
-            url: '../ajax/forgotpw.php',
+            url: '../app/ajax/forgotpw.php',
             data: {
                 email: email
             },

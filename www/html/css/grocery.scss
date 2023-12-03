@@ -1,0 +1,76 @@
+#banner {
+    /*Original Style
+    height: 405px;
+    background-color: lightgray;
+    justify-content: center;*/
+
+    background: linear-gradient(to right, rgba(127,127,127,1) 0%, rgba(127,127,127,.9) 25%, rgba(127,127,127,0) 50%), url("../assets/photos/groceries.jpg") center center fixed;
+    background-size: cover;
+    height: 75vh;
+}
+
+#banner-page {
+    background: linear-gradient(to right, rgba(127,127,127,1) 0%, rgba(127,127,127,.9) 25%, rgba(127,127,127,0) 50%), url("../assets/photos/groceries.jpg") center center;
+    background-size: cover;
+    height: 20vh;
+}
+
+@media (min-width: 1200px) {
+    #itemsContainer {
+      max-width: 2000px; /* Adjust this value as needed */
+    }
+  }
+
+.cart-wrapper {
+  .cart-row { 
+    border: 1px solid lightgrey;
+    border-bottom: none;
+    max-height: 200px;
+    .cart-col {
+      .cart-title{
+        margin-bottom: 2px;
+      }
+      .cart-subtitle {
+        font-size: 14px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+      }
+    }
+  }
+  .cart-row:last-child{
+    border-bottom: 1px solid lightgrey;
+  }
+  .cart-row.even {
+    background:#f8f9fa;
+  }
+}
+
+/*.btn-success, .btn-danger, .btn-warning {
+  background-color: #b0c69e;
+}*/
+
+body{
+  background-color: #b0c69e;
+}
+
+#featuredStores{
+  max-width: 600px;
+}
+
+#footer{
+  height: 75px;
+}
+
+.title-gray-bg {
+    font-weight: bold;
+    background-color: #212529;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: inline-block;
+    color: #b0c69e;
+    width: fit-content;
+}
+
+.custom-shadow{
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.75);
+}

@@ -5,7 +5,7 @@ $(document).on('click', "#submitBtn", function () {
     } else {
         $.ajax({
             type: 'POST',
-            url: '../ajax/resetpw.php',
+            url: '../app/ajax/resetpw.php',
             data: {
                 pass: pass
             },
@@ -13,7 +13,7 @@ $(document).on('click', "#submitBtn", function () {
                 var data = $.parseJSON(data);
 		console.log(data.code);
                 if (data.code == 1) { //on success
-                    window.location = "http://3.14.168.225/index.php";
+                    window.location = "index.php";
                 }
                 else { //error
                     $("#resetError").html("An unknown error occurred.");

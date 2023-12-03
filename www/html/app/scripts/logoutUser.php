@@ -6,7 +6,7 @@ try {
     if (!empty($_SESSION["user"])) {
         $_SESSION["user"] = null;
 	$_SESSION["name"] = null;
-	header("Location: ../pages/login.php");
+	header("Location: ../../login");
     } else {
         $log->error("User is not logged in, however logout was called.");
     }

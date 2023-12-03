@@ -6,7 +6,7 @@ $(document).on('click',"#loginBtn",function(){
     } else {
         $.ajax({
             type: 'POST',
-            url: '../ajax/loginUser.php',
+            url: '../app/ajax/loginUser.php',
             data: {
                 email: email,
                 password: password
@@ -16,7 +16,7 @@ $(document).on('click',"#loginBtn",function(){
                 if(data.code == 1){ //on success
                     $("input[name=email]").val("");
                     $("input[name=pass]").val("");
-                    window.location="http://3.14.168.225/app/pages/index.php"
+                    window.location="index"
                 } else if (data.code == -1){ //invalid login
                     $("#loginError").html("Invalid Email or Password.");
                 } else { //other error
@@ -24,7 +24,7 @@ $(document).on('click',"#loginBtn",function(){
                 }
             },
             error: function(xhr, status, error){
-                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/loginUser.php';
+                var errorMessage = '<b>' + xhr.status + ': ' + xhr.statusText + '</b> app/ajax/loginUser.php';
                 alert(errorMessage);
             }
         })

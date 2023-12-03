@@ -12,17 +12,17 @@ if (session_status() == PHP_SESSION_NONE) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- JS -->
-        <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
-        <script src="../../js/plugins/jquery-3.7.1.min.js"></script>
-	    <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
-	    <script src="../../js/plugins/datatables-1.13.6.min.js"></script>
-        <script src="../../js/item.js"></script>
+        <script src="../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
+        <script src="../js/plugins/jquery-3.7.1.min.js"></script>
+	    <script src="../js/plugins/fontawesome-6.4.2.js"></script>
+	    <script src="../js/plugins/datatables-1.13.6.min.js"></script>
+        <script src="../js/item.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
-	    <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
-	    <link rel="stylesheet" href="../../css/datatables-1.13.6.min.css">
-        <link rel="stylesheet" href="../../css/grocery.css">
+        <link rel="stylesheet" href="../css/bootstrap-5.3.2.min.css">
+	    <link rel="stylesheet" href="../css/fontawesome-6.4.2.css">
+	    <link rel="stylesheet" href="../css/datatables-1.13.6.min.css">
+        <link rel="stylesheet" href="../css/grocery.scss">
     </head>
     <body class="bg-light">
         <!-- Begin Navbar Include -->

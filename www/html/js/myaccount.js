@@ -1,6 +1,6 @@
 $.ajax({
     type: 'POST',
-    url: '../ajax/getUserInfo.php',
+    url: '../app/ajax/getUserInfo.php',
     success: function (data) {
         var data = $.parseJSON(data);
         $("#fname").val(data.fname);
@@ -23,7 +23,7 @@ $(document).on('click', "#updateBtn", function () {
     } else {
         $.ajax({
             type: 'POST',
-            url: '../ajax/updateUser.php',
+            url: '../app/ajax/updateUser.php',
             data: {
                 fname: fname,
                 lname: lname,
@@ -52,11 +52,11 @@ $(document).on('click', "#deleteBtn", function () {
     {
         $.ajax({
             type: 'POST',
-            url: '../ajax/deleteUser.php',
+            url: '../app/ajax/deleteUser.php',
             success: function (data) {
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
-                    window.location = "http://3.14.168.225/app/scripts/logoutUser.php";
+                    window.location = "../scripts/logoutUser.php";
                 } else { //error
                     $("#updateError").html("An error occurred while deleting your account.");
                 }

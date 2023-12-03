@@ -1,6 +1,6 @@
 $.ajax({
     type: 'POST',
-    url: '../ajax/getAllStores.php',
+    url: '../app/ajax/getAllStores.php',
     success: function (data) {
         var data = $.parseJSON(data);
         if (data.code == 1) { //on success

@@ -1,12 +1,12 @@
 $.ajax({
     type: 'POST',
-    url: '../ajax/secquestion.php',
+    url: '../app/ajax/secquestion.php',
     success: function (data) {
         var data = $.parseJSON(data);
         if (data.code == 1) { //user is selected
             $("#question").text(data.question);
         } else if (data.code == -1) { //user not selected
-            window.location = "http://3.14.168.225/app/pages/forgotpw.php";
+            window.location = "forgotpw.php";
         }
     },
     error: function (xhr, status, error) {
@@ -22,14 +22,14 @@ $(document).on('click', "#submitBtn", function () {
     } else {
         $.ajax({
             type: 'POST',
-            url: '../ajax/verifyAnswer.php',
+            url: '../app/ajax/verifyAnswer.php',
             data: {
                 answer: answer
             },
             success: function (data) {
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
-                    window.location = "http://3.14.168.225/app/pages/resetpw.php";
+                    window.location = "resetpw.php";
                 }
                 if (data.code == -1) { //on success
                     $("#forgotError").html("Incorrect answer.");

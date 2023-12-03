@@ -33,7 +33,7 @@ $(document).on('click', "#registerBtn", function () {
     } else {
         $.ajax({
             type: 'POST',
-            url: '../ajax/registerUser.php',
+            url: '../app/ajax/registerUser.php',
             data: {
                 fname: fname,
                 lname: lname,
@@ -52,7 +52,7 @@ $(document).on('click', "#registerBtn", function () {
                     $("input[name=pass]").val("");
                     $("input[name=squestion]").val("");
                     $("input[name=sanswer]").val("");
-                    window.location = "http://3.14.168.225/app/pages/index.php"
+                    window.location = "index.php"
                 } else if (data.code == -1) { //existing email
                     $("#registerError").html("This email already exists.");
                 } else { //other error

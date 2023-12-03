@@ -10,11 +10,11 @@ $check2 = $_SESSION['resetid'];
 
 if(empty($check))
 {
-    header("Location: http://3.14.168.225/app/pages/secquestion.php"); // not verified
+    header("Location: secquestion.php"); // not verified
 }
 else if(empty($check2))
 {
-    header("Location: http://3.14.168.225/app/pages/forgotpw.php"); // no user selected
+    header("Location: forgotpw.php"); // no user selected
 }
 
 ?>
@@ -23,22 +23,22 @@ else if(empty($check2))
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>PricePal</title>
+        <title>PricePal - Reset Password</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- JS -->
-        <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
-        <script src="../../js/plugins/jquery-3.7.1.min.js"></script>
-        <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
-	<script src="../../js/resetpw.js"></script>
+        <script src="../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
+        <script src="../js/plugins/jquery-3.7.1.min.js"></script>
+        <script src="../js/plugins/fontawesome-6.4.2.js"></script>
+	    <script src="../js/resetpw.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
-        <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
-        <link rel="stylesheet" href="../../css/grocery.css">
+        <link rel="stylesheet" href="../css/bootstrap-5.3.2.min.css">
+        <link rel="stylesheet" href="../css/fontawesome-6.4.2.css">
+        <link rel="stylesheet" href="../css/grocery.scss">
     </head>
-    <body class='bg-light'>
+    <body>
         <!-- Begin Navbar Include -->
         <?php include 'navbar.php' ?>
         <!-- End Navbar Include -->
@@ -51,7 +51,7 @@ else if(empty($check2))
                             <p class="h5 text-danger text-center" id="resetError"></p>
                             <form>
                                 <div class="mb-3 text-center">
-                                    <h2>Reset Password</h2>
+                                    <h2 class="title-gray-bg">Reset Password</h2>
                                 </div>
 				<div class="mb-3 text-center">
                                     <p>Please enter your new password below, you will be logged in after.</p>

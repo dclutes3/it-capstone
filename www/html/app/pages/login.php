@@ -7,22 +7,22 @@ session_start();
 <html>
     <head>
         <!-- Title and Meta tags -->
-        <title>PricePal</title>
+        <title>PricePal - Login</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- JS -->
-        <script src="../../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
-        <script src="../../js/plugins/jquery-3.7.1.min.js"></script>
-        <script src="../../js/plugins/fontawesome-6.4.2.js"></script>
-        <script src="../../js/login.js"></script>
+        <script src="../js/plugins/bootstrap-5.3.2.bundle.min.js"></script>
+        <script src="../js/plugins/jquery-3.7.1.min.js"></script>
+        <script src="../js/plugins/fontawesome-6.4.2.js"></script>
+        <script src="../js/login.js"></script>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="../../css/bootstrap-5.3.2.min.css">
-        <link rel="stylesheet" href="../../css/fontawesome-6.4.2.css">
-        <link rel="stylesheet" href="../../css/grocery.css">
+        <link rel="stylesheet" href="../css/bootstrap-5.3.2.min.css">
+        <link rel="stylesheet" href="../css/fontawesome-6.4.2.css">
+        <link rel="stylesheet" href="../css/grocery.scss">
     </head>
-    <body class='bg-light'>
+    <body>
         <!-- Begin Navbar Include -->
         <?php include 'navbar.php' ?>
         <!-- End Navbar Include -->
@@ -35,7 +35,7 @@ session_start();
                             <p class="h5 text-danger text-center" id="loginError"></p>
                             <form>
                                 <div class="mb-3 text-center">
-                                    <h1>Login</h1>
+                                    <h1 class="title-gray-bg">Login</h1>
                                 </div>
                                 <div class="mb-3">
                                     <p class="form-label">Email</p>
@@ -49,7 +49,7 @@ session_start();
                                     <button type="button" id="loginBtn" class="btn btn-success">Submit</button>
                                 </div>
                                 <div class="text-center">
-                                    <a id="resetBtn" href="forgotpw.php">Forgot Password</a>
+                                    <a id="resetBtn" href="forgotpw">Forgot Password</a>
                                 </div>
                             </form>
                         </div>
