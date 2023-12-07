@@ -13,7 +13,7 @@ $(document).on('click',"#forgotBtn",function(){
                 var data = $.parseJSON(data);
                 if(data.code == 1){ //on success
                     $("#forgotError").html("");
-                    window.location.href = 'secquestion.php';
+                    window.location.href = 'secquestion';
                 } else if (data.code == -1){ //invalid email
                     $("#forgotError").html("Invalid Email.");
                 } else { //other error

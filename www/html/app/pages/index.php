@@ -21,12 +21,12 @@
         <?php include 'navbar.php' ?>
         <!-- End Navbar Include -->
         <!-- Begin Banner Area -->
-        <div id="banner" class="d-flex mb-4">
+        <div id="banner" class="d-flex mb-4" title="Banner with decorative image, and title text" aria-label="Banner with decorative image, and title text">
             <div class="my-auto">
                 <div class="col-md-7">
                     <h1 class="title-gray-bg">Looking to save money on groceries?</h1>
                     <h3 class="title-gray-bg">PricePal lets you view the prices of groceries at stores around Columbia to help you find the best deals!</h3>
-                    <a class="btn btn-success" href="items">Get Started</a>
+                    <a class="btn btn-success" href="items" title="Get Started Button" aria-label="Get Started Button">Get Started</a>
                 </div>
             </div>
         </div>
@@ -44,32 +44,32 @@
 
                 <!-- Indicators/dots -->
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#featuredStores" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#featuredStores" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#featuredStores" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#featuredStores" data-bs-slide-to="0" class="active" title="Next Slide Button" aria-label="Next Slide Button"></button>
+                    <button type="button" data-bs-target="#featuredStores" data-bs-slide-to="1" title="Next Slide Button" aria-label="Next Slide Button"></button>
+                    <button type="button" data-bs-target="#featuredStores" data-bs-slide-to="2" title="Next Slide Button" aria-label="Next Slide Button"></button>
                 </div>
 
                 <!-- The slideshow/carousel -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../assets/photos/Hy-Vee.JPG" alt="Hy-Vee" class="d-block w-100">
+                        <img src="../assets/photos/Hy-Vee.JPG" title="Hy-Vee Store Image" alt="Hy-Vee Store Image" class="d-block w-100">
                         <div class="carousel-caption">
                             <h3>Hy-Vee</h3>
-                            <a class="btn btn-primary" href="items?Id=1">View Items</a>
+                            <a class="btn btn-primary" href="items?Id=1" title="View Items Button" aria-label="View Items Button">View Items</a>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../assets/photos/Walmart.JPG" alt="Walmart" class="d-block w-100">
+                        <img src="../assets/photos/Walmart.JPG" title="Walmart Store Image" alt="Hy-Vee Store Image" class="d-block w-100">
                         <div class="carousel-caption">
                             <h3>Walmart</h3>
-                            <a class="btn btn-primary" href="items?Id=2">View Items</a>
+                            <a class="btn btn-primary" href="items?Id=2" title="View Items Button" aria-label="View Items Button">View Items</a>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../assets/photos/Aldi.JPG" alt="Aldi" class="d-block w-100">
+                        <img src="../assets/photos/Target.png" title="Target Store Image" alt="Hy-Vee Store Image" class="d-block w-100">
                         <div class="carousel-caption">
-                            <h3>Aldi</h3>
-                            <a class="btn btn-primary" href="items?Id=3">View Items</a>
+                            <h3>Target</h3>
+                            <a class="btn btn-primary" href="items?Id=4" title="View Items Button" aria-label="View Items Button">View Items</a>
                         </div>
                     </div>
                 </div>

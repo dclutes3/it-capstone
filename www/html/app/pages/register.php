@@ -67,7 +67,7 @@ session_start();
                                     <input name="sanswer" type="text" class="form-control"/>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" id="registerBtn" class="btn btn-success">Submit</button>
+                                    <button type="button" id="registerBtn" class="btn btn-success" title="Submit Button" aria-label="Submit Button">Submit</button>
                                 </div>
                             </form>
                         </div>  
@@ -77,4 +77,7 @@ session_start();
         </div>
         <!-- End Content Area -->
     </body>
+    <!-- Begin Footer Include -->
+    <?php include 'footer.php' ?>
+    <!-- End Footer Include -->
 </html>

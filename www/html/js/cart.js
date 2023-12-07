@@ -4,12 +4,18 @@
 
 $(function () {
     if ($("#tableCartBody").length) { //if the cart body exists, init()
+        $("#removeFromCart").hide();
         initTableCart();
     }
 
-    $(".cart-row").on("click",function(){ //when the row of a cart item is clicked, check that row's checkbox. 
+    $("#tableCartBody").on("click",".cart-row",function(){ //when the row of a cart item is clicked, check that row's checkbox. 
        var checkbox =$(this).find("#cartCheckbox");
        checkbox.prop('checked', !checkbox.prop('checked'));
+       checkbox.trigger("change");
+    })
+
+    $("#tableCartBody").on("click","#cartCheckbox",function(){
+        $(this).prop('checked', !$(this).prop('checked'));
     })
 
     let arr;
@@ -18,16 +24,16 @@ $(function () {
         $("input[name='cart-checkboxes']:checked").each(function(){
             arr.push($(this).data('price'));
         })
-        console.log(arr);
         if(arr.length){                                         //if the arr has numbers, allow the user to delete those selected items
             $("#removeFromCart").prop('disabled',false);
+            $("#removeFromCart").show();
         } else {
             $("#removeFromCart").prop('disabled',true);
+            $("#removeFromCart").hide();
         }
     })
 
     $('#tableCartBody').on("change",".cart-row #quantityDropdown",function(){  //when the quantity dropdown is changed, call updateQuantity() with the priceid and value of the dropdown. 
-        console.log("dropdown changed");
         if($(this).val()>=0){
             updateQuantity($(this).data('price'),$(this).val());
         } else {
@@ -35,26 +41,29 @@ $(function () {
         }
     })
 
-    /*$("#removeFromCart").on("click",function(){
+    $("#removeFromCart").on("click",function(){
         var prices = JSON.stringify(arr);
         var count = arr.length;
-        var removeCount = 0;
-        $("input[name='cart-checkboxes']:checked").each(function(){
-            removeCount+=1;
-        })
-        if(confirm("Are you sure you want to remove ("+removeCount+") Item(s)?")){
+        var text
+        if (count > 1){
+            text = "Are you sure you want to remove "+count+" Items?"
+        } else {
+            text = "Are you sure you want to remove "+count+" Item?"
+        }
+        if(confirm(text)){
             $.ajax({
                 type: 'POST',
                 url: '../app/ajax/updateCart.php',
                 data: {
                     prices: prices,
-                    count: count,
+                    action: "delete",
                 },
                 success: function (data) {
                     console.log(data);
                     var data = $.parseJSON(data);
                     if (data.code === 1) {
                         $("#removeFromCart").prop('disabled',true);
+                        $("#removeFromCart").hide();
                         initTableCart();
                     } else {
                         console.log("ERROR");
@@ -66,18 +75,18 @@ $(function () {
                 }
             });
         }
-    })*/
+    })
 })
 
 
 function updateQuantity(price_id,quantity){     //takes the price_id and the quantity of the row to be changed.
-    console.log("updateQuantity() called");
     $.ajax({
         type: 'POST',
         url: '../app/ajax/updateQuantity.php',  //calls an AJAX script that updates the database. 
         data: {
             price_id: price_id,                 //pass price_id and quantity to the script for use. 
             quantity: quantity,
+            action: "update",
         },
         success: function (data) {              //on success, reinitialize the table.
             initTableCart();

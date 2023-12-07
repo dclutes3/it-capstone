@@ -13,6 +13,7 @@ $log = new Log("updateCart AJAX");
 $prices = ($_REQUEST['prices']) ? $_REQUEST['prices'] : json_encode(array());
 $count = ($_REQUEST['count']) ? intval($_REQUEST['count']) : 0;
 $user = ($_SESSION['user']) ? $_SESSION['user'] : null;
+$action = ($_REQUEST['action']) ? $_REQUEST['action'] : null;
 try {
     if($user){ //if the user is logged in
         $db->query("SELECT prices FROM cart WHERE user_id=:id");
@@ -36,10 +37,16 @@ try {
             $row['quantity']=$price['quantity'];
             foreach(json_decode($prices,true) as $i){ //if there is an instance (there may be multiple) of a number, add it to the 
                 if($price['id']==$i){
-                    $row['quantity']+=1;
+                    if($action == "delete"){
+                        $row['quantity']=0;
+                    } else {
+                        $row['quantity']+=1;
+                    }
                 }
             }
-            $new[] = $row;
+            if($row['quantity']!=0){
+                $new[] = $row;
+            }
         }
             
         $sql = "INSERT INTO cart (user_id, prices) VALUES (:id,:prices) ON DUPLICATE KEY UPDATE prices=:prices"; //add the newly updated array back to the database.

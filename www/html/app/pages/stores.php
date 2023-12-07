@@ -25,7 +25,7 @@
         <!-- End Navbar Include -->
         <!-- Begin Content Area -->
         <div id="storesContainer" class="container shadow py-3 bg-white rounded-2 mt-3">
-            <div id="banner-page" class="d-flex mb-4">
+            <div id="banner-page" class="d-flex mb-4" title="Banner with decorative image, and title text" aria-label="Banner with decorative image, and title text">
                 <div class="my-auto text-center w-100">
                     <div class="col-md-12">
                         <h1 class="title-gray-bg">All Stores</h1>
@@ -37,4 +37,7 @@
         </div>
         <!-- End Content Area -->
     </body>
+    <!-- Begin Footer Include -->
+    <?php include 'footer.php' ?>
+    <!-- End Footer Include -->
 </html>

@@ -7,13 +7,22 @@ $.ajax({
             $('#stores').dataTable({
                 data: data.result,
                 columns: [
-                    {title: 'Store', data: 'name'},
-                    {title: 'Address', data: 'address'},
+                    {title: 'Store', data: 'name', render: function (data, type, row) {
+                            data = data.replace('Hy-Vee', '<span class="hyvee">Hy-Vee</span>');
+                            data = data.replace('Walmart', '<span class="walmart">Walmart</span>');
+                            data = data.replace('Target', '<span class="target">Target</span>');
+                            return (data != null) ? data : "<strong>None</strong>";
+                        }
+                    },
+                    {title: 'Address', data: 'address', render: function (data, type, row) {
+                            return (data != null) ? data : "<strong>None</strong>";
+                        }
+                    },
                     {
                         title: 'Actions',
                         data: 'id',
                         render: function (data, type, row) {
-                            return '<button class="btn btn-success" onclick="storeItems(' + data + ')">Show Items</button>';
+                            return '<button class="btn btn-success" onclick="storeItems(' + data + ')" title="Show Items Button" aria-label="Show Items Button">Show Items</button>';
                         }
                     }
                 ]
@@ -31,5 +40,5 @@ $.ajax({
 })
 
 function storeItems(Id) {
-    window.location.href = 'items.php?Id=' + Id;
+    window.location.href = 'items?Id=' + Id;
 }

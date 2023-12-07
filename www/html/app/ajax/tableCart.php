@@ -38,7 +38,8 @@ try{
     $log->warning("PDOException in cart.php ".$e->getMessage());
 }
 
-ob_start() //the buffer allows for a large (and dynamic) amount of HTML data to be sent to JS through an AJAX request. 
+ob_start(); //the buffer allows for a large (and dynamic) amount of HTML data to be sent to JS through an AJAX request. 
+if(count($cartRows)>0){
 ?>
 <div class='col-sm-12 cart-wrapper px-0' style="overflow: inherit;">
     <?php
@@ -48,7 +49,7 @@ ob_start() //the buffer allows for a large (and dynamic) amount of HTML data to 
     ?>
         <div class="row cart-row <?php echo ($i % 2 == 0) ? "even" : ""; /* add "even" when the row is even */ ?>"> 
             <div class='cart-col col-sm-12 col-md-1 d-flex align-items-center justify-content-center'>
-                <input type="checkbox" name="cart-checkboxes" data-price='<?php echo $row['price_id']; ?>' id="cartCheckbox"></input>
+                <input type="checkbox" name="cart-checkboxes" title="Select Item" aria-label="Select Item" data-price='<?php echo $row['price_id']; ?>' id="cartCheckbox"></input>
             </div>
             <div class="cart-col col-sm-12 col-md-9 mb-2">
                 <p class="h2 cart-title"><?php echo $row['item'];?></p>
@@ -74,8 +75,8 @@ ob_start() //the buffer allows for a large (and dynamic) amount of HTML data to 
                 <p class='cart-subtitle'><b>Subtotal:</b> $<?php echo number_format($row['subtotal'],2);?></p>  <?php //format the total to have 2 decimal places even when it is a whole number. ?>
             </div>
         </div>
-    <?php $total += $row['subtotal'];   //add the row's subtotal to the total
-        $i+=1;                          //increment the row count by 1
+    <?php  $total += $row['subtotal'];   //add the row's subtotal to the total
+        $i+=1;                        //increment the row count by 1
         } ?>
 </div>
 <div class="row">
@@ -86,5 +87,17 @@ ob_start() //the buffer allows for a large (and dynamic) amount of HTML data to 
     </div>
 </div>
 <?php 
+}  else { ?>
+<div class='col-sm-12 cart-wrapper px-0' style="overflow: inherit;">
+    <div class="row cart-row even justify-content-center">
+        <div class='col-auto my-auto'>
+            <div class='d-flex align-items-center'>
+                No items in your cart.            
+            </div>
+        </div>
+        
+    </div>
+</div>
+<?php }
 echo ob_get_clean(); //return the entirety of the result after the ob_start() call. 
 ?>

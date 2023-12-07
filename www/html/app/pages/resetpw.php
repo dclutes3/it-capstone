@@ -10,11 +10,11 @@ $check2 = $_SESSION['resetid'];
 
 if(empty($check))
 {
-    header("Location: secquestion.php"); // not verified
+    header("Location: secquestion"); // not verified
 }
 else if(empty($check2))
 {
-    header("Location: forgotpw.php"); // no user selected
+    header("Location: forgotpw"); // no user selected
 }
 
 ?>
@@ -61,7 +61,7 @@ else if(empty($check2))
                                     <input type="password" class="form-control" name="pass"/>
                                 </div>
                                 <div class="text-center mb-2">
-                                    <button type="button" id="submitBtn" class="btn btn-success">Submit</button>
+                                    <button type="button" id="submitBtn" class="btn btn-success" title="Submit Button" aria-label="Submit Button">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -71,4 +71,7 @@ else if(empty($check2))
         </div>
         <!-- End Content Area -->
     </body>
+    <!-- Begin Footer Include -->
+    <?php include 'footer.php' ?>
+    <!-- End Footer Include -->
 </html>

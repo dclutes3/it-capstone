@@ -13,7 +13,7 @@ $(document).on('click', "#submitBtn", function () {
                 var data = $.parseJSON(data);
 		console.log(data.code);
                 if (data.code == 1) { //on success
-                    window.location = "index.php";
+                    window.location = "index";
                 }
                 else { //error
                     $("#resetError").html("An unknown error occurred.");

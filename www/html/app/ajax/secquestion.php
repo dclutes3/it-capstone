@@ -1,4 +1,7 @@
 <?php
+
+// Reads in security question that was queried earlier for the user and returns it for the UI
+
 if(session_status()==PHP_SESSION_NONE){
     session_start();
 }

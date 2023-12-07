@@ -33,7 +33,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <?php include 'navbar.php' ?>
         <div id="cartContainer" class="container shadow py-5 bg-white rounded-2 mt-3 h-100">
             <?php if ($_SESSION['user']) { ?>
-                <div id="banner-page" class="mb-4">
+                <div id="banner-page" class="mb-4" title="Banner with decorative image, and title text" aria-label="Banner with decorative image, and title text">
                     <div class="my-auto">
                         <div class="col-md-6">
                             <h2 class="title-gray-bg m-4">Your Cart</h2>
@@ -41,7 +41,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
                 </div>
                 <div class="mb-2">
-                    <button type='button' id="removeFromCart" class='btn btn-danger btn-sm' disabled>Remove</button>
+                    <button type='button' id="removeFromCart" class='btn btn-danger btn-sm' title="Remove Button" aria-label="Remove Button" disabled>Remove</button>
                 </div>
                 <div id="tableCartBody" class="px-3">
 
@@ -53,4 +53,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <?php } ?>
         </div>
     </body>
+    <!-- Begin Footer Include -->
+    <?php include 'footer.php' ?>
+    <!-- End Footer Include -->
 </html>

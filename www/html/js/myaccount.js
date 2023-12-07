@@ -1,59 +1,144 @@
-$.ajax({
-    type: 'POST',
-    url: '../app/ajax/getUserInfo.php',
-    success: function (data) {
-        var data = $.parseJSON(data);
-        $("#fname").val(data.fname);
-        $("#lname").val(data.lname);
-        $("#email").val(data.email);
-    },
-    error: function (xhr, status, error) {
-        var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/getUserInfo.php';
-        alert(errorMessage);
+$(function(){
+    if($("#accountBody").length){
+        getAccountBody();
     }
-});
-
-$(document).on('click', "#updateBtn", function () {
-    var fname = $("input[name=fname]").val();
-    var lname = $("input[name=lname]").val();
-    var email = $("input[name=email]").val();
-    var password = $("input[name=pass]").val();
-    if (!fname || !lname || !email) {
-        $("#updateError").html("Oops. Please enter a value for First Name, Last Name, and Email.");
-    } else {
+    $("#accountBody").on("click","#updateFname",function(){
+        $("#fnameInput").show();
+        $("#fnameValue").hide();
+        $("#fnameButton").html('<button id="saveFname" class="btn"><i class="fa-solid fa-floppy-disk"></i></button>');
+    })
+    $("#accountBody").on("click","#saveFname",function(){
         $.ajax({
             type: 'POST',
-            url: '../app/ajax/updateUser.php',
-            data: {
-                fname: fname,
-                lname: lname,
-                email: email,
-                password: password
+            url: '../app/ajax/user_ajax.php',
+            data:{
+                action: "updateFname",
+                fname: $("#fnameInput").val(),
             },
             success: function (data) {
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
-                    $("#updateError").html("Account successfully updated.");
-		    $("#name").html("Welcome, " + fname + " " + lname + "&nbsp;");
+                    $("#fnameInput").hide();
+                    $("#fnameValue").show();
+                    $("#fnameButton").html('<button id="updateFname" class="btn"><i class="fa-solid fa-pencil"></i></button>');
+                    getFnameBody();
                 } else { //error
-                    $("#updateError").html("An unknown error occurred.");
+                    $("#updateError").html(data.msg);
                 }
             },
             error: function (xhr, status, error) {
-                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/updateUser.php';
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/deleteUser.php';
                 alert(errorMessage);
             }
         })
-    }
-});
+    })
+    $("#accountBody").on("click","#updateLname",function(){
+        $("#lnameInput").show();
+        $("#lnameValue").hide();
+        $("#lnameButton").html('<button id="saveLname" class="btn"><i class="fa-solid fa-floppy-disk"></i></button>');
+    })
+    $("#accountBody").on("click","#saveLname",function(){
+        $.ajax({
+            type: 'POST',
+            url: '../app/ajax/user_ajax.php',
+            data:{
+                action: "updateLname",
+                lname: $("#lnameInput").val(),
+            },
+            success: function (data) {
+                var data = $.parseJSON(data);
+                if (data.code == 1) { //on success
+                    console.log(data.msg);
+                    $("#lnameInput").hide();
+                    $("#lnameValue").show();
+                    $("#lnameButton").html('<button id="updateLname" class="btn"><i class="fa-solid fa-pencil"></i></button>');
+                    getLnameBody();
+                } else { //error
+                    $("#updateError").html(data.msg);
+                }
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/deleteUser.php';
+                alert(errorMessage);
+            }
+        })
+        
+    })
+    $("#accountBody").on("click","#updateEmail",function(){
+        $("#emailInput").show();
+        $("#emailValue").hide();
+        $("#emailButton").html('<button id="saveEmail" class="btn"><i class="fa-solid fa-floppy-disk"></i></button>');
+    })
+    $("#accountBody").on("click","#saveEmail",function(){
+        $.ajax({
+            type: 'POST',
+            url: '../app/ajax/user_ajax.php',
+            data:{
+                action: "updateEmail",
+                email: $("#emailInput").val(),
+            },
+            success: function (data) {
+                var data = $.parseJSON(data);
+                if (data.code == 1) { //on success
+                    $("#emailInput").hide();
+                    $("#emailValue").show();
+                    $("#emailButton").html('<button id="updateEmail" class="btn"><i class="fa-solid fa-pencil"></i></button>');
+                    getEmailBody();
+                } else { //error
+                    $("#updateError").html(data.msg);
+                }
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/deleteUser.php';
+                alert(errorMessage);
+            }
+        })
+    })
+    $("#accountBody").on("click","#updatePassword",function(){
+        $("#passwordInput").show();
+        $("#passwordValue").hide();
+        $("#passwordButton").html('<button id="savePassword" class="btn"><i class="fa-solid fa-floppy-disk"></i></button>');
+    })
+    $("#accountBody").on("click","#savePassword",function(){
+        $.ajax({
+            type: 'POST',
+            url: '../app/ajax/user_ajax.php',
+            data:{
+                action: "updatePassword",
+                password: $("#passwordInput").val(),
+            },
+            success: function (data) {
+                var data = $.parseJSON(data);
+                if (data.code == 1) { //on success
+                    console.log(data.msg);
+                    $("#passwordInput").hide();
+                    $("#passwordValue").show();
+                    $("#passwordButton").html('<button id="updatePassword" class="btn"><i class="fa-solid fa-pencil"></i></button>');
+                    getPasswordBody();
+                } else { //error
+                    $("#updateError").html(data.msg);
+                }
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/deleteUser.php';
+                alert(errorMessage);
+            }
+        })
+        
+    })
+})
 
 $(document).on('click', "#deleteBtn", function () {
     if (confirm("Are you sure that you wish to delete your account? This process is permanent, and upon completion you will be logged out."))
     {
         $.ajax({
             type: 'POST',
-            url: '../app/ajax/deleteUser.php',
+            url: '../app/ajax/user_ajax.php',
+            data:{
+                action: "delete",
+            },
             success: function (data) {
+                console.log(data);
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
                     window.location = "../scripts/logoutUser.php";
@@ -68,3 +153,70 @@ $(document).on('click', "#deleteBtn", function () {
         })
     }
 });
+
+function getAccountBody(){
+    getFnameBody();
+    getLnameBody();
+    getEmailBody();
+    getPasswordBody();
+}
+
+function getFnameBody(){
+    $.ajax({
+        url: '/app/ajax/account-fname.php',
+        method: 'GET',
+        dataType: 'html',
+        success: function (data) {
+            $('#fnameBody').html(data);     //overwrite the html of #fnameBody
+            $("#fnameInput").hide();
+        },
+        error: function () {
+            alert('Error fetching data.');
+        }
+    });
+}
+
+function getLnameBody(){
+    $.ajax({
+        url: '/app/ajax/account-lname.php',
+        method: 'GET',
+        dataType: 'html',
+        success: function (data) {
+            $('#lnameBody').html(data);     //overwrite the html of #lnameBody
+            $("#lnameInput").hide();
+        },
+        error: function () {
+            alert('Error fetching data.');
+        }
+    });
+}
+
+function getEmailBody(){
+    $.ajax({
+        url: '/app/ajax/account-email.php',
+        method: 'GET',
+        dataType: 'html',
+        success: function (data) {
+            $('#emailBody').html(data);     //overwrite the html of #emailBody
+            $("#emailInput").hide();
+        },
+        error: function () {
+            alert('Error fetching data.');
+        }
+    });
+}
+
+function getPasswordBody(){
+    $.ajax({
+        url: '/app/ajax/account-password.php',
+        method: 'GET',
+        dataType: 'html',
+        success: function (data) {
+            $('#passwordBody').html(data);     //overwrite the html of #passwordBody
+            $("#passwordInput").hide();
+        },
+        error: function () {
+            alert('Error fetching data.');
+        }
+    });
+}

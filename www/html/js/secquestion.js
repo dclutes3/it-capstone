@@ -6,7 +6,7 @@ $.ajax({
         if (data.code == 1) { //user is selected
             $("#question").text(data.question);
         } else if (data.code == -1) { //user not selected
-            window.location = "forgotpw.php";
+            window.location = "forgotpw";
         }
     },
     error: function (xhr, status, error) {
@@ -29,7 +29,7 @@ $(document).on('click', "#submitBtn", function () {
             success: function (data) {
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
-                    window.location = "resetpw.php";
+                    window.location = "resetpw";
                 }
                 if (data.code == -1) { //on success
                     $("#forgotError").html("Incorrect answer.");

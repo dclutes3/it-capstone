@@ -26,6 +26,7 @@
     border: 1px solid lightgrey;
     border-bottom: none;
     max-height: 200px;
+    min-height: 100px;
     .cart-col {
       .cart-title{
         margin-bottom: 2px;
@@ -73,4 +74,19 @@ body{
 
 .custom-shadow{
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.75);
+}
+
+.hyvee {
+    font-weight: bold;
+    color: crimson;
+}
+
+.walmart {
+    font-weight: bold;
+    color: deepskyblue;
+}
+
+.target {
+    font-weight: bold;
+    color: firebrick;
 }

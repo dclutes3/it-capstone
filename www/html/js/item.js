@@ -17,29 +17,34 @@ $(function () {
         initTableItems();
     })
 
+    $("#tableItems").on("click", "tr", function () {                        //when a row is clicked, toggle the checkbox for selection.
+        var checkbox = $(this).find("#priceCheckbox");
+        checkbox.prop('checked', !checkbox.prop('checked'));
+    })
     let arr;
-    $("#tableItems").on("change","#priceCheckbox", function(){          //maintain an array of all checked checkboxes when one is changed
-        arr=[]
-        $("input[name='price-checkboxes']:checked").each(function(){
+    $("#tableItems").on("change", "#priceCheckbox", function () {          //maintain an array of all checked checkboxes when one is changed
+        arr = []
+        $("input[name='price-checkboxes']:checked").each(function () {
             arr.push($(this).data('price'));
         })
-        if(arr.length){                                                 //allow user to add selected items to cart, as long as something is selected. 
-            $("#addToCart").prop('disabled',false);
+        if (arr.length) {                                                 //allow user to add selected items to cart, as long as something is selected. 
+            $("#addToCart").prop('disabled', false);
         } else {
-            $("#addToCart").prop('disabled',true);
+            $("#addToCart").prop('disabled', true);
         }
     })
 
-    $("#addToCart").on("click",function(){ 
+    $("#addToCart").on("click", function () {
         var prices = JSON.stringify(arr);                               //convert the arr to JSON
         var count = arr.length;
-        if(confirm("Add ("+count+") Item(s) to cart?")){                //if confirmed, add the items to the cart based on updateCart.php script. 
+        if (confirm("Add (" + count + ") Item(s) to cart?")) {                //if confirmed, add the items to the cart based on updateCart.php script. 
             $.ajax({
                 type: 'POST',
                 url: '../app/ajax/updateCart.php',
                 data: {
                     prices: prices,
                     count: count,
+                    action: "update",
                 },
                 success: function (data) {
                     console.log(data);
@@ -98,6 +103,7 @@ function updateFilter() {                                               //update
     var item = ($('.item-select2 option:selected').length) ? $(".item-select2").select2('data')[0].text : "";
     var priceLow = $("#filterPrice").slider("values", 0)
     var priceHigh = $("#filterPrice").slider("values", 1);
+    $("#filterPrice").attr('title', 'Min: $' + priceLow + ', Max: $' + priceHigh);
 
     filter = '{"store":"' + store + '", "item":"' + item + '", "priceLow":' + priceLow + ', "priceHigh":' + priceHigh + '}';  //convert to json object
     //console.log(filter);
@@ -126,26 +132,29 @@ function clearModalSelect2() { //allow specific modal select2 boxes to be cleare
 
 var tableItems = ''
 
-var tableItemColumns = [ //define columns for the item datatable.
-    {"data": "price_id","render": function (data, type, row){
-        return (data != null) ? '<input type="checkbox" name="price-checkboxes" data-price=' + data + ' id="priceCheckbox"></input>' : "";
-    }},
+var tableItemColumns = [//define columns for the item datatable.
+    {"data": "price_id", "render": function (data, type, row) {
+            return (data != null) ? '<input type="checkbox" name="price-checkboxes" data-price=' + data + ' id="priceCheckbox" title="Select Item" aria-label="Select Item"></input>' : "";
+        }},
     {"data": "item", "render": function (data, type, row) {
-            return (data != null) ? data : "No Name";
+            return (data != null) ? "<strong>" + data + "</strong>" : "<strong>No Name</strong>";
         }},
     {"data": "price", "render": function (data, type, row) {
-            return (data != null) ? data : "0.00";
+            return (data != null) ? "<strong>" + data + "</strong>" : "<strong>0.00</strong>";
         }},
     {"data": "type", "render": function (data, type, row) {
             return (data != null) ? data : "None";
         }},
     {"data": "store", "render": function (data, type, row) {
-            return (data != null) ? data : "None";
+            data = data.replace('Hy-Vee', '<span class="hyvee">Hy-Vee</span>');
+            data = data.replace('Walmart', '<span class="walmart">Walmart</span>');
+            data = data.replace('Target', '<span class="target">Target</span>');
+            return (data != null) ? data : "<strong>None</strong>";
         }},
     {"data": "date", "render": function (data, type, row) {
             return (data != null) ? data : "No Date Posted";
         }},
-    {"data": "vote", "orderable":false,"render": function (data, type, row) {
+    {"data": "vote", "orderable": false, "render": function (data, type, row) {
             var sum = (data.sum != null) ? data.sum : 0;
             if (sum > 0) {
                 color = "text-success";
@@ -157,7 +166,7 @@ var tableItemColumns = [ //define columns for the item datatable.
             if ($("#userId").val() == "")
                 return '<p class="text-center mt-3 ' + color + '">' + sum + '</p>'
 
-            return (data != null) ? '<div class="row"><div class="col-1"><button id="upvotePrice" class="btn btn-sm btn-block" action="upvote" data-store_id=' + data.store_id + ' data-id=' + data.id + '><i class="fa-solid fa-caret-up"></i></button><button id="downvotePrice" class="btn btn-sm btn-block" action="downvote" data-store_id=' + data.store_id + ' data-id=' + data.id + '><i class="fa-solid fa-caret-down"></i></button></div><div class="col-1 pl-2 d-flex align-items-center"><p class="text-center mt-3 ' + color + '">' + sum + '</p></div></div>' : "";
+            return (data != null) ? '<div class="row"><div class="col-1"><button id="upvotePrice" class="btn btn-sm btn-block" action="upvote" data-store_id=' + data.store_id + ' data-id=' + data.id + ' title="Upvote Button" aria-label="Upvote Button"><i class="fa-solid fa-caret-up"></i></button><button id="downvotePrice" class="btn btn-sm btn-block" action="downvote" data-store_id=' + data.store_id + ' data-id=' + data.id + ' title="Downvote Button" aria-label="Downvote Button"><i class="fa-solid fa-caret-down"></i></button></div><div class="col-1 pl-2 d-flex align-items-center"><p class="text-center mt-3 ' + color + '">' + sum + '</p></div></div>' : "";
         }}
 ]
 
@@ -198,7 +207,7 @@ function vote(type, id, store) {                                        //takes 
                 console.log(data);
                 var data = $.parseJSON(data);
                 if (data.code === 1) {                                  //reload the table if the vote is successful. 
-                    $("#addToCart").prop("disabled",true);
+                    $("#addToCart").prop("disabled", true);
                     tableItems.ajax.reload();
                 } else {
                     console.log("ERROR");
@@ -247,7 +256,7 @@ function initSelect2() {                                                //init a
             dataType: 'json',
             success: function (data) {
                 $(".store-select2").select2({
-                    placeholder: "Select an store",
+                    placeholder: "Select a store",
                     dropdownAutoWidth: true,
                     allowClear: true,
                     width: "100%",
@@ -342,6 +351,7 @@ function initSlider() {
             slide: function (event, ui) {
                 // Function to handle the slide event
                 $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+		$("#filterPrice").attr('title', 'Min: $' + ui.values[0] + ', Max: $' + ui.values[1]);
             }
         })
         $("#amount").val("$" + $("#filterPrice").slider("values", 0) + " - $" + $("#filterPrice").slider("values", 1));
@@ -349,13 +359,12 @@ function initSlider() {
 }
 
 $(function () {                                                         //code for add item modal functionality
-    $('#addItemButton1').on('click', function(){                        //store the data from modal 1 and move to the next modal on click
+    $('#addItemButton1').on('click', function () {                        //store the data from modal 1 and move to the next modal on click
         name = $('#itemTextBox').val();
         type_id = $('#itemType').val();
-        if (name == "" || type_id == null){
+        if (name == "" || type_id == null) {
             $("#addItemModal1Error").html("Please fill in all fields.");
-        }
-        else{
+        } else {
             $('#addItemModal1').modal('hide');
             $('#addItemModal2').modal('show');
             addItem = true;
@@ -365,14 +374,12 @@ $(function () {                                                         //code f
     $('#addItemButton2').on('click', function () {                      //if all fields are filled correctly, push the data to the addItem AJAX script for insertions. 
         var price = $('#priceTextBox').val();
         var store_id = $('#storeName').val();
-        if (price == "" || store_id == null){
+        if (price == "" || store_id == null) {
             $("#addItemModal2Error").html("Please fill in all fields.");
-        }
-        else {
-            if (Number(price) < 0 || Number(price) > 100){
+        } else {
+            if (Number(price) < 0 || Number(price) > 100) {
                 $("#addItemModal2Error").html("Price must be between 0 and 100.");
-            }
-            else{
+            } else {
                 if (addItem) {
                     $.ajax({
                         type: 'POST',
@@ -383,7 +390,7 @@ $(function () {                                                         //code f
                         },
                         success: function (data) {
                             var data = $.parseJSON(data);
-                            if (data.code == 1){
+                            if (data.code == 1) {
                                 item_id = data.result.id;
                                 $.ajax({
                                     type: 'POST',
@@ -395,12 +402,11 @@ $(function () {                                                         //code f
                                     }
                                 });
                                 $("#addItemModal3Text").html("Item " + name + " with price $" + price + " successfully added.");
-                            }
-                            else{
+                            } else {
                                 $("#addItemModal3Text").html("There was an error adding the item " + name);
                             }
                         },
-                        error: function (xhr, status, error){
+                        error: function (xhr, status, error) {
                             var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> /ajax/getItem.php';
                         }
                     });

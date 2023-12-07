@@ -46,10 +46,10 @@ session_start();
                                     <input type="password" class="form-control" name="pass"/>
                                 </div>
                                 <div class="text-center mb-2">
-                                    <button type="button" id="loginBtn" class="btn btn-success">Submit</button>
+                                    <button type="button" id="loginBtn" class="btn btn-success" title="Submit Button" aria-label="Submit Button">Submit</button>
                                 </div>
                                 <div class="text-center">
-                                    <a id="resetBtn" href="forgotpw">Forgot Password</a>
+                                    <a id="resetBtn" href="forgotpw" title="Forgot Password Button" aria-label="Forgot Password Button">Forgot Password</a>
                                 </div>
                             </form>
                         </div>
@@ -59,4 +59,7 @@ session_start();
         </div>
         <!-- End Content Area -->
     </body>
+    <!-- Begin Footer Include -->
+    <?php include 'footer.php' ?>
+    <!-- End Footer Include -->
 </html>

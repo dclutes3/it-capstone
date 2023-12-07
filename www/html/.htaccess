@@ -1,4 +1,6 @@
 RewriteEngine On
 RewriteBase /
 
+RewriteRule ^$ app/pages/index.php [L]
+
 RewriteRule ^([^/]+)$ app/pages/$1.php [L]

@@ -7,3 +7,4 @@
 include("database/database.php");
 include("log/log.php");
 include("classes/user.php");
+include("api/target/target.php");

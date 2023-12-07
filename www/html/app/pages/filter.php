@@ -14,10 +14,10 @@
             <div id="filterPrice" class="mt-2"></div>
         </div>
         <div class='col-xl-1 col-lg-6'>
-            <button id='clearFilter' type="button" class='btn btn-sm btn-warning mt-4 px-1 form-control'>Clear</button>
+            <button id='clearFilter' type="button" class='btn btn-sm btn-warning mt-4 px-1 form-control' title="Clear Button" aria-label="Clear Button">Clear</button>
         </div>
         <div class='col-xl-1 col-lg-6'>
-            <button id='applyFilter' type="button" class='btn btn-sm btn-success mt-4 px-1 form-control'>Apply</button>
+            <button id='applyFilter' type="button" class='btn btn-sm btn-success mt-4 px-1 form-control' title="Apply Button" aria-label="Apply Button">Apply</button>
         </div>
     </div>
     

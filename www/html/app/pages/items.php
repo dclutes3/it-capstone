@@ -35,7 +35,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- Begin Content Area -->
         <div id="itemsContainer" class="container-fluid shadow py-3 bg-white rounded-2 mt-3">
             <input type="hidden" id="userId" value="<?php echo $_SESSION['user'] ?>">
-            <div id="banner-page" class="d-flex mb-4">
+            <div id="banner-page" class="d-flex mb-4" title="Banner with decorative image, and title text" aria-label="Banner with decorative image, and title text">
                 <div class="my-auto text-center w-100">
                     <div class="col-md-12">
                         <h1 class="title-gray-bg">All Items</h1>
@@ -46,8 +46,8 @@ if (session_status() == PHP_SESSION_NONE) {
                 <?php include_once 'filter.php' ?>
             </div>
             <div class='py-2'>
-                <button id="addItem" type="button" class="btn btn-success">Add Item</button>
-                <button id="addToCart" type="button" class="btn btn-warning" disabled>Add to Cart</button>
+                <button id="addItem" type="button" class="btn btn-success" title="Add Item Button" aria-label="Add Item Button">Add Item</button>
+                <button id="addToCart" type="button" class="btn btn-warning" title="Add to Cart Button" aria-label="Add to Cart Button" disabled>Add to Cart</button>
             </div>
             <table id="tableItems" class="display w-100">
                 <thead>
@@ -68,7 +68,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Item</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close Button" aria-label="Close Button"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="itemSelection">
@@ -86,7 +86,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
                     <div class="modal-footer">
                         <p id="addItemModal1Error"></p>
-                        <button type="button" class="btn btn-success" id="addItemButton1">Add Item</button>
+                        <button type="button" class="btn btn-success" id="addItemButton1" title="Add Item Button" aria-label="Add Item Button">Add Item</button>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title">Add Item</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close Button" aria-label="Close Button"></button>
                     </div>
 
                     <!-- Modal body -->
@@ -115,8 +115,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
                     <div class="modal-footer">
                         <p id="addItemModal2Error"></p>
-                        <button type="button" class="btn btn-danger" id="addItemBackButton">Back</button>
-                        <button type="button" class="btn btn-success" id="addItemButton2">Add Item</button>
+                        <button type="button" class="btn btn-danger" id="addItemBackButton" title="Back Button" aria-label="Back Button">Back</button>
+                        <button type="button" class="btn btn-success" id="addItemButton2" title="Add Item Button" aria-label="Add Item Button">Add Item</button>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title">Add Item</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close Button" aria-label="Close Button"></button>
                     </div>
 
                     <!-- Modal body -->
@@ -149,7 +149,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title">Add Item</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close Button" aria-label="Close Button"></button>
                     </div>
 
                     <!-- Modal body -->
@@ -158,13 +158,15 @@ if (session_status() == PHP_SESSION_NONE) {
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <a href="login.php" class="btn btn-success">Log In</a>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" title="Close Button" aria-label="Close Button">Close</button>
+                        <a href="login" class="btn btn-success" title="Log in Button" aria-label="Log in Button">Log In</a>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- End Content Area -->
     </body>
+    <!-- Begin Footer Include -->
+    <?php include 'footer.php' ?>
+    <!-- End Footer Include -->
 </html>

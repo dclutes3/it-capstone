@@ -55,6 +55,14 @@ class Database {
         $this->dbh->beginTransaction();
     }
 
+    public function inTransaction(){
+        if($this->dbh->inTransaction()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //complete a database transaction
     public function commitTransaction(){
         $this->dbh->commit();
