@@ -1,41 +1,91 @@
 <?php
 # set up the request parameters
-class Target {
-    private $api_key;
+class Kroger {
+    private $clientSecret;
+    private $clientId;
     private $log;
     private $db;
 
     public function __construct() {
         $pass = new Passwords();
-        $this->api_key = $pass->getTargetApiKey();
+        $this->clientSecret = $pass->getKrogerClientSecret();
+        $this->clientId = $pass->getKrogerClientId();
         $this->log = new Log("Target Class");
         $this->db = new Database();
     }
 
-    public function callApi($category_id,$zip_code){
-        $queryString = http_build_query([
-            'api_key' => $this->api_key,
-            'type' => 'category',
-            'category_id' => $category_id,
-            'customer_zipcode' => $zip_code
-        ]);
-            
-        # make the http GET request to RedCircle API
-        $ch = curl_init(sprintf('%s?%s', 'https://api.redcircleapi.com/request', $queryString));
+    public function getToken(){
+        // Your client ID and client secret
+        
+        // API endpoint
+        $apiEndpoint = 'https://api-ce.kroger.com/v1/connect/oauth2/token';
+
+        // Authorization header value (base64 encoded)
+        $authorizationHeaderValue = base64_encode($this->clientId . ':' . $this->clientSecret);
+
+        // Request parameters
+        $data = array(
+            'grant_type' => 'client_credentials'
+        );
+
+        // cURL setup
+        $ch = curl_init($apiEndpoint);
+
+        // Set cURL options
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        # the following options are required if you're using an outdated OpenSSL version
-        # more details: https://www.openssl.org/blog/blog/2021/09/13/LetsEncryptRootCertExpire/
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        
-        curl_setopt($ch, CURLOPT_TIMEOUT, 180);
-        
-        $api_result = curl_exec($ch);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/x-www-form-urlencoded',
+            'Authorization: Basic ' . $authorizationHeaderValue
+        ));
+
+        // Execute cURL session and get the response
+        $response = curl_exec($ch);
+
+        // Check for cURL errors
+        if (curl_errno($ch)) {
+            echo 'Curl error: ' . curl_error($ch);
+        }
+
+        // Close cURL session
         curl_close($ch);
-        
-        # print the JSON response from RedCircle API
-        return $api_result;
+
+        $token = json_decode($response,true)['access_token'];
+        // Output the API response
+        return $token;
+    }
+
+    public function callApi($token,$category){
+        $apiEndpoint = 'https://api-ce.kroger.com/v1/products?filter.term='.$category;
+
+        // Authorization header value (base64 encoded)
+        $authorizationHeaderValue = base64_encode($token);
+
+        // cURL setup
+        $ch = curl_init($apiEndpoint);
+
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Accept: application/json',
+            'Authorization: Bearer ' . $authorizationHeaderValue
+        ));
+
+        // Execute cURL session and get the response
+        $response = curl_exec($ch);
+
+        // Check for cURL errors
+        if (curl_errno($ch)) {
+            echo 'Curl error: ' . curl_error($ch);
+        }
+
+        // Close cURL session
+        curl_close($ch);
+
+        // Output the API response
+        return $response;
     }
     
     private function formatResponse($response){

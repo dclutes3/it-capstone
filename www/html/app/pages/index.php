@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../assets/photos/Target.png" title="Target Store Image" alt="Hy-Vee Store Image" class="d-block w-100">
+                        <img src="../assets/photos/Target.jpg" title="Target Store Image" alt="Hy-Vee Store Image" class="d-block w-100">
                         <div class="carousel-caption">
                             <h3>Target</h3>
                             <a class="btn btn-primary" href="items?Id=4" title="View Items Button" aria-label="View Items Button">View Items</a>

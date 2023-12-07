@@ -43,3 +43,7 @@ if($user){
         $log->debug("PDOException in updateQuantity");
     }
 }
+else
+{
+    header('Location: login');
+}

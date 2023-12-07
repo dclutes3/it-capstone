@@ -3,23 +3,27 @@
 /********************* */
 
 $(function () {
-    if ($("#tableCartBody").length) { //if the cart body exists, init()
+    if ($("#tableCartBody").length) {  
+        verifyLogin(); //if the cart body exists, init()
         $("#removeFromCart").hide();
         initTableCart();
     }
 
-    $("#tableCartBody").on("click",".cart-row",function(){ //when the row of a cart item is clicked, check that row's checkbox. 
+    $("#tableCartBody").on("click",".cart-row",function(){  
+        verifyLogin(); //when the row of a cart item is clicked, check that row's checkbox. 
        var checkbox =$(this).find("#cartCheckbox");
        checkbox.prop('checked', !checkbox.prop('checked'));
        checkbox.trigger("change");
     })
 
-    $("#tableCartBody").on("click","#cartCheckbox",function(){
+    $("#tableCartBody").on("click","#cartCheckbox",function(){  
+        verifyLogin();
         $(this).prop('checked', !$(this).prop('checked'));
     })
 
     let arr;
-    $("#tableCartBody").on("change",".cart-row #cartCheckbox",function(){ //when a chectbox is changed, push the data (price id) to the array to be used in case of a delete
+    $("#tableCartBody").on("change",".cart-row #cartCheckbox",function(){  
+        verifyLogin(); //when a chectbox is changed, push the data (price id) to the array to be used in case of a delete
         arr=[]
         $("input[name='cart-checkboxes']:checked").each(function(){
             arr.push($(this).data('price'));
@@ -33,7 +37,8 @@ $(function () {
         }
     })
 
-    $('#tableCartBody').on("change",".cart-row #quantityDropdown",function(){  //when the quantity dropdown is changed, call updateQuantity() with the priceid and value of the dropdown. 
+    $('#tableCartBody').on("change",".cart-row #quantityDropdown",function(){  
+        verifyLogin();  //when the quantity dropdown is changed, call updateQuantity() with the priceid and value of the dropdown. 
         if($(this).val()>=0){
             updateQuantity($(this).data('price'),$(this).val());
         } else {
@@ -41,7 +46,8 @@ $(function () {
         }
     })
 
-    $("#removeFromCart").on("click",function(){
+    $("#removeFromCart").on("click",function(){  
+        verifyLogin();
         var prices = JSON.stringify(arr);
         var count = arr.length;
         var text
@@ -79,7 +85,8 @@ $(function () {
 })
 
 
-function updateQuantity(price_id,quantity){     //takes the price_id and the quantity of the row to be changed.
+function updateQuantity(price_id,quantity){  
+    verifyLogin();     //takes the price_id and the quantity of the row to be changed.
     $.ajax({
         type: 'POST',
         url: '../app/ajax/updateQuantity.php',  //calls an AJAX script that updates the database. 
@@ -98,7 +105,8 @@ function updateQuantity(price_id,quantity){     //takes the price_id and the qua
     });
 }
 
-function initTableCart(){                       //initialize or reinitialize the table
+function initTableCart(){  
+    verifyLogin();                     //initialize or reinitialize the table
     $.ajax({
         url: '/app/ajax/tableCart.php',
         method: 'GET',
@@ -110,4 +118,10 @@ function initTableCart(){                       //initialize or reinitialize the
             alert('Error fetching data.');
         }
     });
+}
+
+function verifyLogin(){
+    if(!$("#hiddenUser").val()){
+        window.location = "login";
+    }
 }

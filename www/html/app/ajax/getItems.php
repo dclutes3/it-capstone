@@ -10,6 +10,7 @@ $log = new Log("GET ITEMS AJAX");
 
 $store = ($_REQUEST['store'] !== "") ? $_REQUEST['store'] : null; //get the initial values from the filter, set to null on default
 $item = ($_REQUEST['item'] !== "") ? $_REQUEST['item'] : null;
+$type = ($_REQUEST['type'] !== "") ? $_REQUEST['type'] : null;
 $low = ($_REQUEST['priceLow'] !== "") ? intval($_REQUEST['priceLow']) : null;
 $high = ($_REQUEST['priceHigh'] !== "") ? intval($_REQUEST['priceHigh']) : null;
 //$log->warning("store: $store, item: $item, low: $low, high: $high");
@@ -21,6 +22,9 @@ try{
     }
     if ($item !== null) {                                           //if there is an item filter, add that to the conditions array
         $conditions[] = "item = :item";
+    }
+    if ($type !== null) {                                           //if there is an item filter, add that to the conditions array
+        $conditions[] = "type = :type";
     }
     if ($low !== null) {                                            //if there is a low price filter, add that to the conditions
         $conditions[] = "price >= :low";
@@ -37,6 +41,7 @@ try{
     
     if($store !== null) $db->bind(":store_id",$store);              //bind the values, on if they are not null.
     if($item !== null) $db->bind(":item",$item);
+    if($type !== null) $db->bind(":type",$type);
     if($low !== null) $db->bind(":low",$low);
     if($high !== null) $db->bind(":high",$high);
 

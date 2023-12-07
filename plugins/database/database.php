@@ -2,19 +2,24 @@
 /********************* */
 /* Drew Clutes aack2f  */
 /********************* */
+include_once("/var/plugins/config.php");
 
 class Database {
-    private $host = "capstone.c8pz0fqew1c3.us-east-2.rds.amazonaws.com";
+    private $host;
     private $user = "admin";
-    private $password = "70NzYUJehuQ4MjMpZCsg";
+    private $password;
     private $dbname = "capstone";
+    private $log;
 
     private $dbh;
     private $stmt;
 
     public function __construct(){
+        $pass = new Passwords();
+        $this->host = $pass->getDBHostname();
+        $this->password = $pass->getDBPassword();
+        $this->log = new Log("database class");
         $this->dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname,$this->user,$this->password);
-
     }
     
     //this function prepares the SQL statement to be executed

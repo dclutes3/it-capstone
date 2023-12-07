@@ -58,6 +58,7 @@ try {
         echo json_encode(array("code" => 1, "msg" => "Successfully updated cart."));
     } else {
         $log->error("There is no user logged in");
+        header('Location: login');
         echo json_encode(array("code" => -1, "msg" => "No User Logged In"));
     }
 } catch (PDOException $e) {

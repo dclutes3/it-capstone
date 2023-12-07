@@ -32,6 +32,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <body>
         <?php include 'navbar.php' ?>
         <div id="cartContainer" class="container shadow py-5 bg-white rounded-2 mt-3 h-100">
+            <input type="hidden" id="hiddenUser" value="<?php echo $_SESSION['user']; ?>"/>
             <?php if ($_SESSION['user']) { ?>
                 <div id="banner-page" class="mb-4" title="Banner with decorative image, and title text" aria-label="Banner with decorative image, and title text">
                     <div class="my-auto">

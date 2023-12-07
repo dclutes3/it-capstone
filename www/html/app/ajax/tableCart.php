@@ -31,8 +31,6 @@ try{
                 $row['subtotal']    = $item['price']*$price['quantity'];
                 $cartRows[] = $row;
         }        
-    } else {
-        $cartRows=array(); //if there is no user, no data can be found
     }
 } catch(PDOException $e){
     $log->warning("PDOException in cart.php ".$e->getMessage());

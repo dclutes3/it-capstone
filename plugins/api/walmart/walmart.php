@@ -1,27 +1,28 @@
-<?php
-# set up the request parameters
-class Target {
+<?php 
+include_once("/var/plugins/config.php");
+
+class Walmart {
     private $api_key;
     private $log;
     private $db;
 
     public function __construct() {
         $pass = new Passwords();
-        $this->api_key = $pass->getTargetApiKey();
-        $this->log = new Log("Target Class");
+        $this->api_key = $pass->getWalmartApiKey();
+        $this->log = new Log("Walmart Class");
         $this->db = new Database();
     }
 
-    public function callApi($category_id,$zip_code){
-        $queryString = http_build_query([
+    public function callApi($category_id){
+        # set up the request parameters
+        $queryString = http_build_query([   
             'api_key' => $this->api_key,
             'type' => 'category',
             'category_id' => $category_id,
-            'customer_zipcode' => $zip_code
         ]);
-            
-        # make the http GET request to RedCircle API
-        $ch = curl_init(sprintf('%s?%s', 'https://api.redcircleapi.com/request', $queryString));
+        
+        # make the http GET request to BlueCart API
+        $ch = curl_init(sprintf('%s?%s', 'https://api.bluecartapi.com/request', $queryString));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         # the following options are required if you're using an outdated OpenSSL version
@@ -34,11 +35,11 @@ class Target {
         $api_result = curl_exec($ch);
         curl_close($ch);
         
-        # print the JSON response from RedCircle API
+        # print the JSON response from BlueCart API
         return $api_result;
     }
     
-    private function formatResponse($response){
+    public function formatResponse($response){
         $json = json_decode($response,true)['category_results'];
         $result_array = array();
         foreach($json as $item){
@@ -76,7 +77,7 @@ class Target {
 
                         $this->db->query("SELECT id FROM item WHERE name=:name");
                         $this->db->bind(":name",$item['name']);
-                        echo $this->db->single();
+                        //echo print_r($this->db->single(),true);
                     } else {
                         $sql = "INSERT INTO item (id,name,type_id) VALUES (:id,:name,:type_id) ON DUPLICATE KEY UPDATE name=:name,type_id=:type_id";
                         $this->db->query($sql);
@@ -107,7 +108,7 @@ class Target {
                             $sql = "INSERT INTO price (price,store_id,item_id,user_id) VALUES (:price,:store,:item,:user)";
                             $this->db->query($sql);
                             $this->db->bind(":price",$item['price']);
-                            $this->db->bind(":store",4);
+                            $this->db->bind(":store",2);
                             $this->db->bind(":item",$item_id);
                             $this->db->bind(":user",0);
                             $this->db->execute();

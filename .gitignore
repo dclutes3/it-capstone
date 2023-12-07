@@ -14,3 +14,4 @@ run
 vendor
 *.lock
 node_modules
+/plugins/classes/passwords.php

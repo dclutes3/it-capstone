@@ -20,7 +20,14 @@ $(function () {
     $("#tableItems").on("click", "tr", function () {                        //when a row is clicked, toggle the checkbox for selection.
         var checkbox = $(this).find("#priceCheckbox");
         checkbox.prop('checked', !checkbox.prop('checked'));
+        checkbox.trigger("change");
     })
+
+    $("#tableItems").on("click","tr #priceCheckbox",function(){
+        console.log("clicked");
+        $(this).prop('checked', !$(this).prop('checked'));
+    })
+
     let arr;
     $("#tableItems").on("change", "#priceCheckbox", function () {          //maintain an array of all checked checkboxes when one is changed
         arr = []
@@ -101,12 +108,12 @@ var filter = ''
 function updateFilter() {                                               //update the filter based on the values of the filter inputs. 
     var store = ($('.store-select2 option:selected').length) ? $(".store-select2").select2('data')[0].id : "";
     var item = ($('.item-select2 option:selected').length) ? $(".item-select2").select2('data')[0].text : "";
+    var itemType = ($('.item-type-select2 option:selected').length) ? $(".item-type-select2").select2('data')[0].text : "";
     var priceLow = $("#filterPrice").slider("values", 0)
     var priceHigh = $("#filterPrice").slider("values", 1);
     $("#filterPrice").attr('title', 'Min: $' + priceLow + ', Max: $' + priceHigh);
 
-    filter = '{"store":"' + store + '", "item":"' + item + '", "priceLow":' + priceLow + ', "priceHigh":' + priceHigh + '}';  //convert to json object
-    //console.log(filter);
+    filter = '{"store":"' + store + '", "item":"' + item + '", "type":"' + itemType +'", "priceLow":' + priceLow + ', "priceHigh":' + priceHigh + '}';  //convert to json object
 }
 function clearFilter() { //reset the filter and update it to reflect that
     clearSelect2();
@@ -118,6 +125,7 @@ function clearFilter() { //reset the filter and update it to reflect that
 
 function clearSelect2() {
     $(".item-select2").val(null).trigger("change");
+    $(".item-type-select2").val(null).trigger("change");
     $(".store-select2").val(null).trigger("change");
     clearModalSelect2();
 }
@@ -182,6 +190,7 @@ function initTableItems() {
                 "priceLow": filter.priceLow,
                 "priceHigh": filter.priceHigh,
                 "store": filter.store,
+                "type":filter.type,
                 "item": filter.item
             }
         },
@@ -243,6 +252,29 @@ function initSelect2() {                                                //init a
             },
             error: function (xhr, status, error) {
                 var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> /app/ajax/select2-items.php';
+            }
+        })
+    }
+    if ($(".item-type-select2").length) {
+        $.ajax({
+            type: 'GET',
+            url: '/app/ajax/select2-itemType.php',
+            dataType: 'json',
+            success: function (data) {
+                $(".item-type-select2").select2({
+                    placeholder: "Select an category",
+                    dropdownAutoWidth: true,
+                    allowClear: true,
+                    width: "100%",
+                    data: data,
+                    initSelection: function (element, callback) {
+                        // No default selection
+                    }
+                });
+                $(".item-type-select2").val(null).trigger('change');
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> /app/ajax/select2-itemType.php';
             }
         })
     }
