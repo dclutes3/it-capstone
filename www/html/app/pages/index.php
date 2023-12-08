@@ -24,9 +24,9 @@
         <div id="banner" class="d-flex mb-4" title="Banner with decorative image, and title text" aria-label="Banner with decorative image, and title text">
             <div class="my-auto">
                 <div class="col-md-7">
-                    <h1 class="title-gray-bg">Looking to save money on groceries?</h1>
-                    <h3 class="title-gray-bg">PricePal lets you view the prices of groceries at stores around Columbia to help you find the best deals!</h3>
-                    <a class="btn btn-success" href="items" title="Get Started Button" aria-label="Get Started Button">Get Started</a>
+                    <h1 class="title-gray-bg mx-2">Looking to save money on groceries?</h1>
+                    <h3 class="title-gray-bg mx-2">PricePal lets you view the prices of groceries at stores around Columbia to help you find the best deals!</h3>
+                    <a class="btn btn-success mx-2" href="items" title="Get Started Button" aria-label="Get Started Button">Get Started</a>
                 </div>
             </div>
         </div>
