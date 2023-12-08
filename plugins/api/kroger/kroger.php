@@ -18,7 +18,7 @@ class Kroger {
         // Your client ID and client secret
         
         // API endpoint
-        $apiEndpoint = 'https://api-ce.kroger.com/v1/connect/oauth2/token';
+        $apiEndpoint = 'https://api.kroger.com/v1/connect/oauth2/token';
 
         // Authorization header value (base64 encoded)
         $authorizationHeaderValue = base64_encode($this->clientId . ':' . $this->clientSecret);
@@ -51,27 +51,25 @@ class Kroger {
         // Close cURL session
         curl_close($ch);
 
-        $token = json_decode($response,true)['access_token'];
         // Output the API response
-        return $token;
+        return $response;
     }
 
     public function callApi($token,$category){
-        $apiEndpoint = 'https://api-ce.kroger.com/v1/products?filter.term='.$category;
-
-        // Authorization header value (base64 encoded)
-        $authorizationHeaderValue = base64_encode($token);
-
+        //$apiEndpoint = "https://api.kroger.com/v1/locations/61500124";
+        $productId = "0001111085428";
+        $locationId = "61500124";
+        $apiEndpoint = "https://api.kroger.com/v1/products/{$productId}";
         // cURL setup
         $ch = curl_init($apiEndpoint);
 
         // Set cURL options
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Accept: application/json',
-            'Authorization: Bearer ' . $authorizationHeaderValue
+            'Authorization: Bearer ' . json_decode($token,true)['access_token']
         ));
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
 
         // Execute cURL session and get the response
         $response = curl_exec($ch);
@@ -85,7 +83,16 @@ class Kroger {
         curl_close($ch);
 
         // Output the API response
-        return $response;
+        $decodedResponse = json_decode($response, true);
+
+        if ($decodedResponse === null) {
+            // Output the raw response if JSON decoding fails
+            echo "unencoded";
+            return $response;
+        } else {
+            // Output the decoded JSON
+            return print_r($decodedResponse);
+        }
     }
     
     private function formatResponse($response){

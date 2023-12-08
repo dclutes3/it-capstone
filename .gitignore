@@ -15,3 +15,6 @@ vendor
 *.lock
 node_modules
 /plugins/classes/passwords.php
+plugins/api/kroger
+plugins/api/kroger/kroger.php
+plugins/api/kroger/test.php
