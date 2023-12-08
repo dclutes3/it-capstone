@@ -1,5 +1,11 @@
 <?php
+
 include_once("/var/plugins/config.php");
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 class user {
 
     private $fname;
@@ -40,7 +46,7 @@ class user {
     public function getEmail() {
         return $this->email;
     }
-    
+
     public function delete() {
         try {
             $this->db->query("DELETE FROM capstone.user WHERE ID = :id");
@@ -48,11 +54,11 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your account could not be deleted due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your account could not be deleted due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"Account successfully deleted."));
+        return json_encode(array("code" => 1, "msg" => "Account successfully deleted."));
     }
-    
+
     public function updateAll($fname, $lname, $email, $pass) {
         try {
             $this->db->query("UPDATE capstone.user SET fname = :fname, lname = :lname, email = :email, password = :pass WHERE ID = :id");
@@ -64,11 +70,11 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your account could not be updated due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your account could not be updated due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"Account successfully updated."));
+        return json_encode(array("code" => 1, "msg" => "Account successfully updated."));
     }
-    
+
     public function updateOther($fname, $lname, $email) {
         try {
             $this->db->query("UPDATE capstone.user SET fname = :fname, lname = :lname, email = :email WHERE ID = :id");
@@ -79,12 +85,15 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your account could not be updated due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your account could not be updated due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"Account successfully updated."));
+        return json_encode(array("code" => 1, "msg" => "Account successfully updated."));
     }
-    
+
     public function updateFname($fname) {
+        if ($fname == null) {
+            return json_encode(array("code" => -1, "msg" => "You must enter a value."));
+        }
         try {
             $this->db->query("UPDATE capstone.user SET fname = :fname WHERE ID = :id");
             $this->db->bind(":fname", $fname);
@@ -92,12 +101,16 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your first name could not be updated due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your first name could not be updated due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"First name successfully updated."));
+        $_SESSION["name"] = $fname . " " . $this->lname;
+        return json_encode(array("code" => 1, "msg" => "First name successfully updated."));
     }
 
     public function updateLname($lname) {
+        if ($lname == null) {
+            return json_encode(array("code" => -1, "msg" => "You must enter a value."));
+        }
         try {
             $this->db->query("UPDATE capstone.user SET lname = :lname WHERE ID = :id");
             $this->db->bind(":lname", $lname);
@@ -105,12 +118,16 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your last name could not be updated due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your last name could not be updated due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"Last name successfully updated."));
+        $_SESSION["name"] = $this->fname . " " . $lname;
+        return json_encode(array("code" => 1, "msg" => "Last name successfully updated."));
     }
 
     public function updateEmail($email) {
+        if ($email == null) {
+            return json_encode(array("code" => -1, "msg" => "You must enter a value."));
+        }
         try {
             $this->db->query("UPDATE capstone.user SET email = :email WHERE ID = :id");
             $this->db->bind(":email", $email);
@@ -118,12 +135,15 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your email could not be updated due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your email could not be updated due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"Email successfully updated."));
+        return json_encode(array("code" => 1, "msg" => "Email successfully updated."));
     }
 
     public function resetPass($pass) {
+        if ($pass == null) {
+            return json_encode(array("code" => -1, "msg" => "You must enter a value."));
+        }
         try {
             $this->db->query("UPDATE capstone.user SET password = :pass WHERE ID = :id");
             $this->db->bind(":pass", password_hash($pass, PASSWORD_ARGON2ID));
@@ -131,10 +151,10 @@ class user {
             $this->db->execute();
         } catch (PDOException $e) {
             $this->log->error("PDO EXCEPTION");
-            return json_encode(array("code"=>-1,"msg"=>"Your password could not be updated due to an error."));
+            return json_encode(array("code" => -1, "msg" => "Your password could not be updated due to an error."));
         }
-        return json_encode(array("code"=>1,"msg"=>"Password successfully updated."));
+        return json_encode(array("code" => 1, "msg" => "Password successfully updated."));
     }
-
 }
+
 ?>

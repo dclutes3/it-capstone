@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -15,21 +15,21 @@ $action = ($_REQUEST['action'] != null) ? $_REQUEST['action'] : null;
 
 $log->debug("$action");
 
-if($action == "updateAll"){
+if ($action == "updateAll") {
     //all fields
-    echo $usr->updateAll($fname,$lname,$email,$password);
-} else if ($action == "updateOther"){
+    echo $usr->updateAll($fname, $lname, $email, $password);
+} else if ($action == "updateOther") {
     //all but password
-    echo $usr->updateOther($fname,$lname,$email);
-} else if ($action == "updateFname"){
+    echo $usr->updateOther($fname, $lname, $email);
+} else if ($action == "updateFname") {
     echo $usr->updateFname($fname);
-} else if ($action == "updateLname"){
+} else if ($action == "updateLname") {
     echo $usr->updateLname($lname);
-} else if ($action == "updateEmail"){
+} else if ($action == "updateEmail") {
     echo $usr->updateEmail($email);
-} else if ($action == "updatePassword"){
+} else if ($action == "updatePassword") {
     echo $usr->resetPass($password);
-} else if ($action == "delete"){
+} else if ($action == "delete") {
     echo $usr->delete();
 }
 ?>

@@ -47,7 +47,11 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
             <div class='py-2'>
                 <button id="addItem" type="button" class="btn btn-success" title="Add Item Button" aria-label="Add Item Button">Add Item</button>
-                <button id="addToCart" type="button" class="btn btn-warning" title="Add to Cart Button" aria-label="Add to Cart Button" disabled>Add to Cart</button>
+                <?php
+                if (!empty($_SESSION["user"])) {
+                    echo '<button id="addToCart" type="button" class="btn btn-warning" title="Add to Cart Button" aria-label="Add to Cart Button" disabled>Add to Cart</button>';
+                }
+                ?>
             </div>
             <table id="tableItems" class="display w-100">
                 <thead>
@@ -58,7 +62,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <th>Type</th>
                         <th>Store</th>
                         <th>Date</th>
-                        <th style="max-width: 50px">Votes</th><?php //id for votes and such  ?>
+                        <th style="max-width: 50px">Votes</th><?php //id for votes and such   ?>
                     </tr>
                 </thead>
             </table>

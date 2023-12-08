@@ -141,7 +141,7 @@ $(document).on('click', "#deleteBtn", function () {
                 console.log(data);
                 var data = $.parseJSON(data);
                 if (data.code == 1) { //on success
-                    window.location = "../scripts/logoutUser.php";
+                    window.location = "../app/scripts/logoutUser.php";
                 } else { //error
                     $("#updateError").html("An error occurred while deleting your account.");
                 }
@@ -168,6 +168,7 @@ function getFnameBody(){
         dataType: 'html',
         success: function (data) {
             $('#fnameBody').html(data);     //overwrite the html of #fnameBody
+            $('#name').html("Welcome, " + $("#fnameValue").text() + " " + $("#lnameValue").text() + "&nbsp;");
             $("#fnameInput").hide();
         },
         error: function () {
@@ -183,6 +184,7 @@ function getLnameBody(){
         dataType: 'html',
         success: function (data) {
             $('#lnameBody').html(data);     //overwrite the html of #lnameBody
+            $('#name').html("Welcome, " + $("#fnameValue").text() + " " + $("#lnameValue").text() + "&nbsp;");
             $("#lnameInput").hide();
         },
         error: function () {

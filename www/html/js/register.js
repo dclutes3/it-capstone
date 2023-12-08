@@ -52,7 +52,7 @@ $(document).on('click', "#registerBtn", function () {
                     $("input[name=pass]").val("");
                     $("input[name=squestion]").val("");
                     $("input[name=sanswer]").val("");
-                    window.location = "index.php"
+                    window.location = "index"
                 } else if (data.code == -1) { //existing email
                     $("#registerError").html("This email already exists.");
                 } else { //other error
