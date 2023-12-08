@@ -76,7 +76,7 @@ $(function () {
                     }
                 },
                 error: function (xhr, status, error) {
-                    var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/vote.php';
+                    var errorMessage = '<strong>' + xhr.status + ': ' + xhr.statusText + '</strong> app/ajax/updateCart.php';
                     alert(errorMessage);
                 }
             });
