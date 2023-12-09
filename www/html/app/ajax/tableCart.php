@@ -46,10 +46,10 @@ if(count($cartRows)>0){
         foreach($cartRows as $row){ //loop through all rows of the data for a user's cart. 
     ?>
         <div class="row cart-row <?php echo ($i % 2 == 0) ? "even" : ""; /* add "even" when the row is even */ ?>"> 
-            <div class='cart-col col-sm-12 col-md-1 d-flex align-items-center justify-content-center'>
+            <div class='cart-col col-xs-1 col-sm-1 col-md-1 d-flex align-items-center justify-content-center'>
                 <input type="checkbox" name="cart-checkboxes" title="Select Item" aria-label="Select Item" data-price='<?php echo $row['price_id']; ?>' id="cartCheckbox"></input>
             </div>
-            <div class="cart-col col-sm-12 col-md-9 mb-2">
+            <div class="cart-col col-xs-11 col-sm-11 col-md-9 mb-2">
                 <p class="h2 cart-title"><?php echo $row['item'];?></p>
                 <p class='cart-subtitle'><b>Item Category: </b><?php echo $row['type'];?></p>
                 <p class='cart-subtitle'><b>Store: </b><?php echo $row['store'];?></p>
